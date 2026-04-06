@@ -1,0 +1,67 @@
+{
+  "title": "AxonRing - Smart Rings for High Performers",
+  "type": "page",
+  "version": "3.24.0",
+  "page_settings": {
+    "template": "elementor_canvas",
+    "background_background": "classic",
+    "background_color": "#0a0a0a",
+    "padding": {"unit":"px","top":"0","right":"0","bottom":"0","left":"0"}
+  },
+  "content": [
+    {
+      "id": "hero",
+      "elType": "section",
+      "settings": {"structure": "20", "background_background": "classic", "background_image": {"url": "https://picsum.photos/id/1015/2000/1200", "alt": "AxonRing premium smart ring hero banner - health and productivity wearable on professional hand"}},
+      "elements": [
+        {
+          "id": "hero-inner",
+          "elType": "column",
+          "settings": {"_column_size": 50},
+          "elements": [
+            {
+              "id": "hero-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {"title": "Health that works as hard as you do.", "size": "huge", "typography_typography": "custom", "typography_font_size": {"unit":"px","size":72}}
+            },
+            {
+              "id": "hero-image",
+              "elType": "widget",
+              "widgetType": "image",
+              "settings": {
+                "image": {"url": "PLACEHOLDER_HERO_MAIN", "alt": "AxonRing smart ring on finger with emerald glow - premium titanium wearable for professionals"},
+                "image_size": "full",
+                "align": "center"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "elType": "section",
+      "settings": {"background_background": "classic", "background_color": "#18181b"},
+      "elements": [
+        {
+          "id": "features-grid",
+          "elType": "container",
+          "settings": {"layout": "grid", "columns": 3},
+          "elements": [
+                        {
+                          "id": "feature-1",
+                          "elType": "widget",
+                          "widgetType": "icon-box",
+                          "settings": {
+                            "icon": "fa-solid fa-heart-pulse",
+                            "title": "Advanced Health Monitoring",
+                            "description": "HRV, SpO₂, sleep tracking, and recovery insights."
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }

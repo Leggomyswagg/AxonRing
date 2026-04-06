@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── Primary Meta ── -->
+    <title>AxonRing — NFC Smart Rings | Tap to Pay, Access & Connect</title>
+    <meta name="description" content="AxonRing smart rings combine premium craftsmanship with advanced NFC technology. Tap to pay, unlock doors, share contact info and more. Free shipping over $199." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="canonical" href="https://axonring.com/" />
+
+    <!-- ── Open Graph ── -->
+    <meta property="og:site_name"    content="AxonRing" />
+    <meta property="og:title"        content="AxonRing — The Future On Your Finger" />
+    <meta property="og:description"  content="Premium NFC smart rings. Tap to pay, unlock, and connect. Shop the full collection." />
+    <meta property="og:type"         content="website" />
+    <meta property="og:url"          content="https://axonring.com/" />
+    <meta property="og:image"        content="https://axonring.com/og.jpg" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- ── Twitter Card ── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@axonring" />
+    <meta name="twitter:title"       content="AxonRing — NFC Smart Rings" />
+    <meta name="twitter:description" content="Tap to pay, unlock, and connect. Premium NFC smart rings starting at $139." />
+    <meta name="twitter:image"       content="https://axonring.com/og.jpg" />
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png"     href="/favicon.png" sizes="32x32" />
+    <link rel="apple-touch-icon"          href="/apple-touch-icon.png" />
+
+    <!-- ── Security Headers (meta fallbacks) ── -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options"        content="DENY" />
+    <meta http-equiv="Referrer-Policy"        content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy"     content="camera=(), microphone=(), geolocation=(), payment=(self)" />
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src  'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src    'self' https://fonts.gstatic.com;
+      img-src     'self' data: blob: https://d64gsuwffb70l.cloudfront.net https://*.cloudfront.net https://www.google-analytics.com https://www.googletagmanager.com;
+      connect-src 'self'
+                  https://api.stripe.com
+                  https://tek-agent-65076290.base44.app
+                  https://www.google-analytics.com
+                  https://analytics.google.com
+                  https://region1.google-analytics.com;
+      frame-src   https://js.stripe.com https://hooks.stripe.com;
+      object-src  'none';
+      base-uri    'self';
+      form-action 'self';
+    " />
+
+    <!-- ── Google Analytics 4 ── -->
+    <!-- IMPORTANT: Replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
+    <!-- Find it in Google Analytics → Admin → Data Streams → your stream -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_title:    document.title,
+        page_location: window.location.href,
+        // Enhanced ecommerce
+        send_page_view: true,
+      });
+
+      // ── GA4 helper exposed globally for React ──
+      window.trackEvent = function(eventName, params) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', eventName, params || {});
+        }
+      };
+    </script>
+
+    <!-- ── Structured Data: Organization ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AxonRing",
+      "url": "https://axonring.com",
+      "logo": "https://axonring.com/favicon.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@axonring.com",
+        "contactType": "customer support"
+      },
+      "sameAs": ["https://axonring.store"]
+    }
+    </script>
+
+    <!-- ── Structured Data: WebSite + SearchAction ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AxonRing",
+      "url": "https://axonring.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://axonring.com/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- ── Structured Data: Product Catalog (ItemList) ── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "AxonRing NFC Smart Rings",
+      "url": "https://axonring.com",
+      "itemListElement": [
+        {
+          "@type": "ListItem", "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "AxonRing Adventure",
+            "description": "Military-grade titanium NFC smart ring for the adventurous. Contactless payments, GPS, heart rate.",
+            "url": "https://axonring.com",
+            "image": "https://d64gsuwffb70l.cloudfront.net/69afc9463ade716221889914_1773187931200_ec86bb2a.png",
+            "brand": { "@type": "Brand", "name": "AxonRing" },
+            "offers": {
+              "@type": "Offer", "priceCurrency": "USD", "price": "219.99",
+              "availability": "https://schema.org/InStock",
+              "url": "https://axonring.com"
+            },
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "342" }
+          }
+        },
+        {
+          "@type": "ListItem", "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "AxonRing Balance",
+            "description": "Wellness-focused NFC ring with stress & SpO2 monitoring.",
+            "url": "https://axonring.com",
+            "brand": { "@type": "Brand", "name": "AxonRing" },
+            "offers": {
+              "@type": "Offer", "priceCurrency": "USD", "price": "169.99",
+              "availability": "https://schema.org/InStock",
+              "url": "https://axonring.com"
+            },
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "218" }
+          }
+        },
+        {
+          "@type": "ListItem", "position": 3,
+          "item": {
+            "@type": "Product",
+            "name": "AxonRing Elite",
+            "description": "Top-tier NFC smart ring — premium materials, advanced health tracking.",
+            "url": "https://axonring.com",
+            "brand": { "@type": "Brand", "name": "AxonRing" },
+            "offers": {
+              "@type": "Offer", "priceCurrency": "USD", "price": "399.99",
+              "availability": "https://schema.org/InStock",
+              "url": "https://axonring.com"
+            },
+            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "189" }
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
