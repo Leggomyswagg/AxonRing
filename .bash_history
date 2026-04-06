@@ -46,3 +46,67 @@ pwd
 nmp install
 npm install
 npm run dev
+pwd
+l
+ls
+npm run dev
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node -v
+npm -v
+npm install
+npm instal
+npm install
+run npm audit fix --force
+npm audit fix --force
+npm run dev
+git init
+git add .
+git commit -m "first commit"
+git branch -m <tylong882@gmail.com>
+git config --global user.name "Tylong"
+git config --global user.email "tylong882@gmail.com"
+git config --global user.name "Tylong"
+git add .
+git commit -m "first commit"
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+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
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin mai[200~git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin mai
+git remote set-url origin https://Leggomyswagg@[github.com/Leggomyswagg/axonring.git](https://github.com/Leggomyswagg/axonring.git)
+git remote set-url origin https://Leggomyswagg@[github.com/Leggomyswagg/axonring.git]
+git branch -M main
+git push -u origin main
+git remote set-url origin https://Leggomyswagg@[github.com/Leggomyswagg/axonring.git](https://github.com/Leggomyswagg/axonring.git)
+git remote set-url origin https://Leggomyswagg@github.com/Leggomyswagg/axonring.git
+git branch -M main
+git push -u origin main
+git remote add origin https://github.com/Leggomyswagg/AxonRing.git
+git remote set-url origin https://Leggomyswagg@github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+git remote set-url origin https://github.com/Leggomyswagg/AxonRing.git
+git branch -M main
+git push -u origin main
+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
