@@ -73,7 +73,7 @@ export const PRODUCTS: Product[] = [
     handle: 'axonring-adventure',
     name: 'AxonRing Adventure',
     description: 'Built for the bold. Military-grade titanium, IP68 waterproofing, and a scratch-resistant surface that can handle anything nature throws at it. Tap to pay on the trail, at the summit, or in the water.',
-    price: 219,
+    price: 329,
     images: [
       `${HERO_BASE}/69afc9463ade716221889914_1773187931200_ec86bb2a.png`,
     ],
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
     handle: 'axonring-pro',
     name: 'AxonRing Pro',
     description: 'The smart ring for everyday achievers. Brushed steel finish meets advanced NFC tech in a slim, comfortable profile. Seamlessly pay, unlock, and share your contact info with a single tap.',
-    price: 249,
+    price: 349,
     images: [
       `${HERO_BASE}/69afc9463ade716221889914_1773187931200_ec86bb2a.png`,
     ],
