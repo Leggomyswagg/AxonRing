@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@shopify/create-app": "^3.93.1"
+  }
+}

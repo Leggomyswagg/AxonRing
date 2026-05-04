@@ -11,6 +11,8 @@
 # hlsearch on (H) or off (h):
 ~h
 # Command Line History (newest to oldest):
+:qa
+|2,0,1775729299,,"qa"
 
 # Search String History (newest to oldest):
 
@@ -23,7 +25,18 @@
 # Registers:
 
 # File marks:
+'0  74  0  ~/axon/package.json
+|4,48,74,0,1775729299,"~/axon/package.json"
 
 # Jumplist (newest first):
+-'  74  0  ~/axon/package.json
+|4,39,74,0,1775729299,"~/axon/package.json"
+-'  1  0  ~/axon/package.json
+|4,39,1,0,1775729180,"~/axon/package.json"
 
 # History of marks within files (newest to oldest):
+
+> ~/axon/package.json
+	*	1775729290	0
+	"	74	0
+	^	74	0
