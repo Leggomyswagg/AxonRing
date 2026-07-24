@@ -13,6 +13,12 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import NotFound from "./pages/NotFound";
+import SizeGuidePage from "./pages/support/SizeGuidePage";
+import FAQPage from "./pages/support/FAQPage";
+import ShippingPage from "./pages/support/ShippingPage";
+import ReturnsPage from "./pages/support/ReturnsPage";
+import PrivacyPage from "./pages/support/PrivacyPage";
+import TermsPage from "./pages/support/TermsPage";
 import GrowthLayout from "./pages/growth/GrowthLayout";
 import GrowthOverview from "./pages/growth/Overview";
 import CustomerDB360 from "./pages/growth/CustomerDB360";
@@ -37,6 +43,12 @@ const App = () => (
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/order-confirmation" element={<OrderConfirmation />} />
+                <Route path="/size-guide" element={<SizeGuidePage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/shipping" element={<ShippingPage />} />
+                <Route path="/returns" element={<ReturnsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/terms" element={<TermsPage />} />
                 <Route path="/growth" element={<GrowthLayout />}>
                   <Route index element={<GrowthOverview />} />
                   <Route path="db360" element={<CustomerDB360 />} />

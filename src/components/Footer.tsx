@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Shield, Truck, RotateCcw, Lock, ArrowRight } from 'lucide-react';
+import { Shield, Truck, RotateCcw, Lock, ArrowRight, BadgeCheck } from 'lucide-react';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -27,12 +27,13 @@ export default function Footer() {
       {/* Trust badges */}
       <div className="border-b border-zinc-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {[
-              { icon: Truck, label: 'Free Shipping', desc: 'On all orders' },
+              { icon: Truck, label: 'Free Shipping', desc: 'On orders $199+' },
               { icon: Shield, label: '2-Year Warranty', desc: 'Full coverage' },
               { icon: RotateCcw, label: '30-Day Returns', desc: 'No questions asked' },
               { icon: Lock, label: 'Secure Payment', desc: 'SSL encrypted' },
+              { icon: BadgeCheck, label: 'No Subscription', desc: 'Ever. Your data is yours' },
             ].map(({ icon: Icon, label, desc }) => (
               <div key={label} className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center flex-shrink-0">
@@ -114,11 +115,12 @@ export default function Footer() {
             {
               title: 'Support',
               links: [
-                { label: 'Size Guide', to: '/#size-guide' },
-                { label: 'FAQ', to: '/#faq' },
-                { label: 'Shipping', to: '/#shipping' },
-                { label: 'Returns', to: '/#returns' },
-                { label: 'Contact Us', to: '/#contact' },
+                { label: 'Size Guide', to: '/size-guide' },
+                { label: 'Sizing Kit', to: '/product/axonring-sizing-kit' },
+                { label: 'FAQ', to: '/faq' },
+                { label: 'Shipping', to: '/shipping' },
+                { label: 'Returns & Warranty', to: '/returns' },
+                { label: 'Contact Us', to: '/faq#contact' },
               ],
             },
             {
@@ -127,8 +129,8 @@ export default function Footer() {
                 { label: 'About Us', to: '/#about' },
                 { label: 'Careers', to: '/#careers' },
                 { label: 'Press', to: '/#press' },
-                { label: 'Privacy Policy', to: '/#privacy' },
-                { label: 'Terms of Service', to: '/#terms' },
+                { label: 'Privacy Policy', to: '/privacy' },
+                { label: 'Terms of Service', to: '/terms' },
               ],
             },
           ].map((section) => (

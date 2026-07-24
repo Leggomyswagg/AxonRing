@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Wifi, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Wifi, Shield, Zap, BadgeCheck } from 'lucide-react';
 
 const HERO_IMG = 'https://d64gsuwffb70l.cloudfront.net/69d0c917003e3eb97e85a036_1775290974994_c1322658.jpg';
 
@@ -49,7 +49,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg sm:text-xl text-zinc-400 max-w-xl mb-10 leading-relaxed">
-            The world's most advanced NFC smart ring. Pay, unlock, track, and control — all from the ring on your finger. Crafted from premium materials for those who refuse to compromise.
+            The smart ring that taps to pay <em className="not-italic text-white">and</em> tracks your health — no monthly subscription, ever. Pay, unlock, track, and control, all from the ring on your finger.
           </p>
 
           {/* CTAs */}
@@ -75,6 +75,7 @@ export default function Hero() {
               { icon: Wifi, label: 'NFC Payments', color: 'text-cyan-400' },
               { icon: Shield, label: 'Health Tracking', color: 'text-emerald-400' },
               { icon: Zap, label: 'Smart Home', color: 'text-amber-400' },
+              { icon: BadgeCheck, label: 'No Subscription', color: 'text-rose-400' },
             ].map(({ icon: Icon, label, color }) => (
               <div key={label} className="flex items-center gap-2.5 px-4 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
                 <Icon className={`w-4 h-4 ${color}`} />

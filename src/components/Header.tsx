@@ -52,7 +52,7 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-zinc-800/50 shadow-2xl' : 'bg-transparent'}`}>
       {/* Promo bar */}
       <div className="bg-gradient-to-r from-rose-600 via-rose-500 to-amber-500 text-white text-center py-1.5 text-xs font-medium tracking-wide">
-        Free Shipping on All Orders — Use code <span className="font-bold">WELCOME10</span> for 10% off
+        Free Shipping on Orders $199+ · No Subscription, Ever — Use code <span className="font-bold">WELCOME10</span> for 10% off
       </div>
 
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

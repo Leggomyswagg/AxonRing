@@ -308,6 +308,24 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     review_count: 89,
   },
+  {
+    id: 'axonring-sizing-kit',
+    handle: 'axonring-sizing-kit',
+    name: 'AxonRing Sizing Kit',
+    description: 'Get your fit right before you order. Seven precision try-on sizers (US 6–12) matching the exact width and profile of an AxonRing. Wear your best-fit sizer for a full day — including a workout and a night\'s sleep — then order with confidence. The $10 kit price is credited toward your ring purchase.',
+    price: 10,
+    images: [
+      `${HERO_BASE}/69afc9463ade716221889914_1773187931200_ec86bb2a.png`,
+    ],
+    tags: ['accessory', 'sizing'],
+    metadata: { nfc: false, finish: 'Matte Black Sizers', material: 'Recyclable Polymer' },
+    variants: [
+      { id: 'axonring-sizing-kit-std', option1: 'Sizes 6–12', price: 10, sku: 'AXONSIZINGKIT-STD', inventory_qty: 500 },
+    ],
+    features: ['7 Try-On Sizers (US 6–12)', 'True AxonRing Width & Profile', 'Free Standard Shipping', '$10 Credited Toward Your Ring'],
+    rating: 4.8,
+    review_count: 143,
+  },
 ];
 
 // ── Collections ──
@@ -319,7 +337,7 @@ export const COLLECTIONS: Collection[] = [
     description: 'The complete AxonRing collection',
     image_url: `${HERO_BASE}/69d0c917003e3eb97e85a036_1775290974994_c1322658.jpg`,
     is_visible: true,
-    product_ids: PRODUCTS.map(p => p.id),
+    product_ids: PRODUCTS.filter(p => !p.tags.includes('accessory')).map(p => p.id),
   },
   {
     id: 'elite',

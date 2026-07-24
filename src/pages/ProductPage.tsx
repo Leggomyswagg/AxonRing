@@ -359,6 +359,7 @@ export default function ProductPage() {
   const currentPrice    = selectedVariant?.price ?? product.price;
   const inStock         = selectedVariant ? selectedVariant.inventory_qty > 0 : true;
   const isElite         = product.tags.includes('elite');
+  const isAccessory     = product.tags.includes('accessory');
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
@@ -373,10 +374,12 @@ export default function ProductPage() {
     }, quantity);
   };
 
-  // Related products — same collection, excluding current
-  const related = PRODUCTS
-    .filter(p => p.id !== product.id && p.tags.some(t => product.tags.includes(t)))
-    .slice(0, 4);
+  // Related products — same collection, excluding current.
+  // The sizing kit shares no ring tags, so surface best-sellers there instead.
+  const related = (isAccessory
+    ? PRODUCTS.filter(p => p.tags.includes('best-seller'))
+    : PRODUCTS.filter(p => p.id !== product.id && p.tags.some(t => product.tags.includes(t)))
+  ).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -405,10 +408,12 @@ export default function ProductPage() {
                 {isElite && (
                   <div className="absolute top-6 left-6 px-4 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 text-black text-xs font-bold uppercase tracking-wider rounded-full">Elite</div>
                 )}
-                <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
-                  <Wifi className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-[10px] font-medium text-white uppercase tracking-wider">NFC</span>
-                </div>
+                {product.metadata.nfc && (
+                  <div className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1.5 bg-black/50 backdrop-blur-sm rounded-full border border-white/10">
+                    <Wifi className="w-3.5 h-3.5 text-cyan-400" />
+                    <span className="text-[10px] font-medium text-white uppercase tracking-wider">NFC</span>
+                  </div>
+                )}
               </div>
               {product.images.length > 1 && (
                 <div className="flex gap-3">
@@ -435,9 +440,20 @@ export default function ProductPage() {
 
               <h1 className="text-3xl lg:text-4xl font-bold text-white mb-3">{product.name}</h1>
               <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2">{product.metadata.finish} · {product.metadata.material}</p>
-              <p className="text-3xl font-bold bg-gradient-to-r from-rose-400 to-amber-400 bg-clip-text text-transparent mb-6">
+              <p className="text-3xl font-bold bg-gradient-to-r from-rose-400 to-amber-400 bg-clip-text text-transparent mb-2">
                 ${currentPrice}
               </p>
+              {!isAccessory && (
+                <div className="mb-6 space-y-1">
+                  <p className="text-sm text-zinc-400">
+                    or 4 interest-free payments of <span className="font-semibold text-zinc-200">${(currentPrice / 4).toFixed(2)}</span> — installment options at checkout
+                  </p>
+                  <p className="flex items-center gap-1.5 text-sm text-emerald-400">
+                    <BadgeCheck className="w-4 h-4 flex-shrink-0" />
+                    No subscription, ever — every feature included
+                  </p>
+                </div>
+              )}
 
               <p className="text-zinc-400 leading-relaxed mb-8">{product.description}</p>
 
@@ -453,14 +469,14 @@ export default function ProductPage() {
               {/* Size selector */}
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
-                  <label className="text-sm font-semibold text-white">Ring Size</label>
-                  <button className="text-xs text-rose-400 hover:text-rose-300 transition-colors">Size Guide</button>
+                  <label className="text-sm font-semibold text-white">{isAccessory ? 'Option' : 'Ring Size'}</label>
+                  <Link to="/size-guide" className="text-xs text-rose-400 hover:text-rose-300 transition-colors">Size Guide</Link>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map(v => (
                     <button key={v.option1} onClick={() => setSelectedSize(v.option1)}
                       disabled={v.inventory_qty === 0}
-                      className={`w-12 h-12 rounded-xl font-medium text-sm transition-all duration-200 ${
+                      className={`min-w-[3rem] px-3 h-12 rounded-xl font-medium text-sm transition-all duration-200 ${
                         selectedSize === v.option1
                           ? 'bg-rose-500 text-white border-2 border-rose-500 shadow-lg shadow-rose-500/25'
                           : v.inventory_qty > 0
@@ -472,7 +488,17 @@ export default function ProductPage() {
                     </button>
                   ))}
                 </div>
-                {!selectedSize && <p className="text-xs text-zinc-500 mt-2">Select a size to continue</p>}
+                {!selectedSize && <p className="text-xs text-zinc-500 mt-2">{isAccessory ? 'Select an option to continue' : 'Select a size to continue'}</p>}
+                {!isAccessory && (
+                  <div className="mt-4 p-4 bg-zinc-900/70 border border-zinc-800 rounded-xl flex items-start gap-3">
+                    <Truck className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs text-zinc-400 leading-relaxed">
+                      Not sure of your size? Get the{' '}
+                      <Link to="/product/axonring-sizing-kit" className="text-rose-400 hover:text-rose-300 font-medium">AxonRing Sizing Kit</Link>{' '}
+                      first — $10, shipped free, credited toward your ring.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Quantity */}

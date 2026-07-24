@@ -9,6 +9,7 @@ const tiers = [
     link: '/collections/standard',
     highlight: false,
     features: {
+      'No Monthly Subscription': true,
       'NFC Payments': true,
       'Heart Rate Monitoring': true,
       'Sleep Tracking': true,
@@ -30,6 +31,7 @@ const tiers = [
     link: '/collections/pro',
     highlight: true,
     features: {
+      'No Monthly Subscription': true,
       'NFC Payments': true,
       'Heart Rate Monitoring': true,
       'Sleep Tracking': true,
@@ -51,6 +53,7 @@ const tiers = [
     link: '/collections/elite',
     highlight: false,
     features: {
+      'No Monthly Subscription': true,
       'NFC Payments': true,
       'Heart Rate Monitoring': true,
       'Sleep Tracking': true,
