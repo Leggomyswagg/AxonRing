@@ -326,6 +326,42 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     review_count: 143,
   },
+  {
+    id: 'axonring-charging-dock',
+    handle: 'axonring-charging-dock',
+    name: 'AxonRing Charging Dock',
+    description: 'A machined aluminium dock that charges your ring from empty in 45 minutes. Weighted base, magnetic cradle, and a USB-C passthrough so one cable handles your desk. Doubles as a place to put your ring down that isn\'t the edge of the sink.',
+    price: 49,
+    images: [
+      `${HERO_BASE}/69afc9463ade716221889914_1773187931200_ec86bb2a.png`,
+    ],
+    tags: ['accessory', 'charging'],
+    metadata: { nfc: false, finish: 'Anodised Graphite', material: 'Machined Aluminium' },
+    variants: [
+      { id: 'axonring-charging-dock-std', option1: 'Graphite', price: 49, sku: 'AXONDOCK-GRA', inventory_qty: 200 },
+    ],
+    features: ['45-Minute Full Charge', 'Magnetic Cradle', 'USB-C Passthrough', 'Weighted Non-Slip Base'],
+    rating: 4.7,
+    review_count: 96,
+  },
+  {
+    id: 'axonring-travel-case',
+    handle: 'axonring-travel-case',
+    name: 'AxonRing Travel Case',
+    description: 'A hard-shell case that holds your ring and a charge. The integrated 800mAh battery tops your ring up three times over without a wall socket — built for long-haul flights and weekends away.',
+    price: 29,
+    images: [
+      `${HERO_BASE}/69afc9463ade716221889914_1773187931200_ec86bb2a.png`,
+    ],
+    tags: ['accessory', 'travel'],
+    metadata: { nfc: false, finish: 'Matte Black', material: 'Hard-Shell Composite' },
+    variants: [
+      { id: 'axonring-travel-case-std', option1: 'Matte Black', price: 29, sku: 'AXONCASE-BLK', inventory_qty: 300 },
+    ],
+    features: ['800mAh Internal Battery', '3 Full Ring Charges', 'Crush-Resistant Shell', 'Cabin-Bag Friendly'],
+    rating: 4.6,
+    review_count: 71,
+  },
 ];
 
 // ── Collections ──
@@ -384,7 +420,21 @@ export const COLLECTIONS: Collection[] = [
     is_visible: true,
     product_ids: PRODUCTS.filter(p => p.tags.includes('best-seller')).map(p => p.id),
   },
+  {
+    id: 'accessories',
+    handle: 'accessories',
+    title: 'Accessories',
+    description: 'Sizing kits, charging, and travel gear for your AxonRing',
+    image_url: `${HERO_BASE}/69d0c917003e3eb97e85a036_1775290974994_c1322658.jpg`,
+    is_visible: true,
+    product_ids: PRODUCTS.filter(p => p.tags.includes('accessory')).map(p => p.id),
+  },
 ];
+
+// Accessories cross-sold on ring product pages.
+export function getAccessories(): Product[] {
+  return PRODUCTS.filter(p => p.tags.includes('accessory'));
+}
 
 // ── Helpers ──
 export function getProduct(handle: string): Product | undefined {

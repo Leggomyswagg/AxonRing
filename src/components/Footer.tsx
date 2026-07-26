@@ -101,6 +101,7 @@ export default function Footer() {
                 { label: 'Pro', to: '/collections/pro' },
                 { label: 'Elite', to: '/collections/elite' },
                 { label: 'New Arrivals', to: '/collections/new-arrivals' },
+                { label: 'Accessories', to: '/collections/accessories' },
               ],
             },
             {

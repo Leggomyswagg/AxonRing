@@ -9,7 +9,7 @@ import {
   Wifi, Activity, Home, ChevronRight, Star, Check,
   ThumbsUp, BadgeCheck, MessageSquarePlus, X,
 } from 'lucide-react';
-import { getProduct, PRODUCTS } from '@/data/catalog';
+import { getProduct, getAccessories, PRODUCTS } from '@/data/catalog';
 import { analytics } from '@/hooks/useAnalytics';
 
 const BASE44_API = 'https://tek-agent-65076290.base44.app/functions';
@@ -381,6 +381,8 @@ export default function ProductPage() {
     : PRODUCTS.filter(p => p.id !== product.id && p.tags.some(t => product.tags.includes(t)))
   ).slice(0, 4);
 
+  const accessories = getAccessories().filter(a => a.id !== product.id);
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Header />
@@ -562,6 +564,29 @@ export default function ProductPage() {
           <ReviewsSection productId={product.id} seedRating={product.rating} seedCount={product.review_count} />
 
           {/* ── Related products ── */}
+          {/* ── Complete your setup — accessory cross-sell on ring pages ── */}
+          {!isAccessory && accessories.length > 0 && (
+            <div className="mt-20 pt-20 border-t border-zinc-800">
+              <h2 className="text-2xl font-bold text-white mb-2">Complete Your Setup</h2>
+              <p className="text-zinc-500 mb-8">Sizing, charging, and travel gear built for AxonRing.</p>
+              <div className="grid sm:grid-cols-3 gap-6">
+                {accessories.map(a => (
+                  <Link key={a.id} to={`/product/${a.handle}`}
+                    className="group flex items-center gap-4 bg-zinc-900/50 rounded-2xl border border-zinc-800/50 hover:border-rose-500/30 transition-all duration-300 p-4"
+                  >
+                    <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-zinc-800">
+                      <img src={a.images[0]} alt={a.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-white text-sm group-hover:text-rose-300 transition-colors">{a.name}</p>
+                      <p className="text-rose-400 font-bold mt-1">${a.price}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           {related.length > 0 && (
             <div className="mt-20 pt-20 border-t border-zinc-800">
               <h2 className="text-2xl font-bold text-white mb-8">You May Also Like</h2>

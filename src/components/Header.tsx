@@ -189,6 +189,7 @@ export default function Header() {
               { to: '/collections/standard',     label: 'Standard'     },
               { to: '/collections/new-arrivals', label: 'New Arrivals' },
               { to: '/collections/best-sellers', label: 'Best Sellers' },
+              { to: '/collections/accessories',  label: 'Accessories'  },
             ].map(({ to, label }) => (
               <Link key={to} to={to} className="block px-4 py-3 text-zinc-300 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors font-medium">
                 {label}
