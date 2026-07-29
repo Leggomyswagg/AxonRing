@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Disallow private/utility paths
+Disallow: /api/
+Disallow: /functions/
+Disallow: /*.json$
+
+# Crawl rate (optional — be kind to bots)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://axonring.com/sitemap.xml
