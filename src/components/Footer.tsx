@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Shield, Truck, RotateCcw, Lock, ArrowRight, BadgeCheck } from 'lucide-react';
+import { subscribeEmail } from '@/lib/subscribeService';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -12,11 +13,7 @@ export default function Footer() {
     if (!email) return;
     setSubError('');
     try {
-      await fetch('https://tek-agent-65076290.base44.app/functions/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'footer' }),
-      });
+      await subscribeEmail(email, 'footer');
     } catch { setSubError('Something went wrong. Try again.'); return; }
     setSubscribed(true);
     setEmail('');

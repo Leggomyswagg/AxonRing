@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react';
 import { analytics } from '@/hooks/useAnalytics';
+import { subscribeEmail } from '@/lib/subscribeService';
 
-const BASE44_API          = 'https://tek-agent-65076290.base44.app/functions';
 const ABANDONED_TIMEOUT   = 15 * 60 * 1000; // 15 minutes
 
 export interface CartItem {
@@ -56,11 +56,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       const savedEmail = localStorage.getItem('axonring_checkout_email');
       if (savedEmail) {
-        fetch(`${BASE44_API}/subscribe`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: savedEmail, source: 'abandoned_cart' }),
-        }).catch(() => {});
+        subscribeEmail(savedEmail, 'abandoned_cart').catch(() => {});
       }
     }, ABANDONED_TIMEOUT);
   }, []);

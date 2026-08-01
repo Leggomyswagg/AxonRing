@@ -10,22 +10,13 @@ import {
   ThumbsUp, BadgeCheck, MessageSquarePlus, X,
 } from 'lucide-react';
 import { getProduct, getAccessories, PRODUCTS } from '@/data/catalog';
+import {
+  fetchProductReviews,
+  markReviewHelpful,
+  submitReview,
+  type Review,
+} from '@/lib/reviewsService';
 import { analytics } from '@/hooks/useAnalytics';
-
-const BASE44_API = 'https://tek-agent-65076290.base44.app/functions';
-
-// ── Types ──────────────────────────────────────────────────────
-interface Review {
-  id: string;
-  product_id: string;
-  reviewer_name: string;
-  rating: number;
-  title: string;
-  body: string | null;
-  verified_purchase: boolean;
-  helpful_count: number;
-  created_date: string;
-}
 
 // ── Star Input ─────────────────────────────────────────────────
 function StarRatingInput({ value, onChange }: { value: number; onChange: (v: number) => void }) {
@@ -93,19 +84,14 @@ function ReviewForm({ productId, onSubmitted, onClose }: { productId: string; on
     setError('');
 
     try {
-      const res = await fetch(`${BASE44_API}/reviews`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          product_id:       productId,
-          reviewer_name:    name.trim(),
-          reviewer_email:   email.trim() || null,
-          rating,
-          title:            title.trim(),
-          body:             body.trim() || null,
-        }),
+      await submitReview({
+        productId,
+        reviewerName:  name.trim(),
+        reviewerEmail: email.trim() || undefined,
+        rating,
+        title:         title.trim(),
+        body:          body.trim(),
       });
-      if (!res.ok) throw new Error('Failed to submit');
       onSubmitted();
     } catch {
       setError('Failed to submit review. Please try again.');
@@ -167,12 +153,8 @@ function ReviewCard({ review }: { review: Review }) {
     if (helpfulClicked) return;
     setHelpfulClicked(true);
     setHelpfulCount(c => c + 1);
-    // Fire-and-forget — no Supabase needed
-    fetch(`${BASE44_API}/reviews`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ review_id: review.id }),
-    }).catch(() => {});
+    // Optimistic — the count is cosmetic, so a failed vote just stays local.
+    markReviewHelpful(review.id).catch(() => {});
   };
 
   const timeAgo = (d: string) => {
@@ -230,9 +212,8 @@ function ReviewsSection({ productId, seedRating, seedCount }: { productId: strin
   const fetchReviews = async () => {
     setLoading(true);
     try {
-      const res  = await fetch(`${BASE44_API}/reviews?product_id=${encodeURIComponent(productId)}`);
-      const data = await res.json();
-      setReviews(Array.isArray(data) ? data : (data.reviews || []));
+      const { reviews } = await fetchProductReviews(productId);
+      setReviews(reviews);
     } catch {
       setReviews([]);
     } finally {

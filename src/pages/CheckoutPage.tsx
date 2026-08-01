@@ -16,8 +16,14 @@ import { analytics } from '@/hooks/useAnalytics';
 // ── Base44 backend endpoints ──
 const BASE44_API = 'https://tek-agent-65076290.base44.app/functions';
 
-// ── Use YOUR live Stripe publishable key here ──
-const stripePromise = loadStripe('pk_live_51OJhJBHdGQpsHqInIzu7c6PzGPSH0yImD4xfpofvxvFZs0VFhPRXZCyEgYkkhOtBOXFWvssYASs851mflwQvjnrl00T6DbUwWZ');
+// Stripe publishable key — safe in the browser by design, but read from the
+// environment so test/live can differ per deploy. Falls back to the previously
+// hardcoded live key so existing deploys keep working until the env var is set.
+const STRIPE_PUBLISHABLE_KEY =
+  (import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY as string | undefined) ||
+  'pk_live_51OJhJBHdGQpsHqInIzu7c6PzGPSH0yImD4xfpofvxvFZs0VFhPRXZCyEgYkkhOtBOXFWvssYASs851mflwQvjnrl00T6DbUwWZ';
+
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 const US_STATES = [
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
