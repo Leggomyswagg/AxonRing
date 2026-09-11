@@ -17,13 +17,15 @@ import { analytics } from '@/hooks/useAnalytics';
 const BASE44_API = 'https://tek-agent-65076290.base44.app/functions';
 
 // Stripe publishable key — safe in the browser by design, but read from the
-// environment so test/live can differ per deploy. Falls back to the previously
-// hardcoded live key so existing deploys keep working until the env var is set.
-const STRIPE_PUBLISHABLE_KEY =
-  (import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY as string | undefined) ||
-  'pk_live_51OJhJBHdGQpsHqInIzu7c6PzGPSH0yImD4xfpofvxvFZs0VFhPRXZCyEgYkkhOtBOXFWvssYASs851mflwQvjnrl00T6DbUwWZ';
+// environment so test/live can differ per deploy. Production builds fail fast
+// when this value is missing; no deployable credential is kept in source.
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY as string | undefined;
 
-const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+const stripePromise = STRIPE_PUBLISHABLE_KEY ? loadStripe(STRIPE_PUBLISHABLE_KEY) : null;
+
+function errorMessage(error: unknown, fallback: string): string {
+  return error instanceof Error && error.message ? error.message : fallback;
+}
 
 const US_STATES = [
   'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
@@ -150,8 +152,8 @@ export default function CheckoutPage() {
       if (!res.ok || !data.clientSecret) throw new Error(data.error || 'Failed to initialize payment');
       setClientSecret(data.clientSecret);
       setStep('payment');
-    } catch (err: any) {
-      setPaymentError(err.message || 'Unable to initialize payment. Please try again.');
+    } catch (error: unknown) {
+      setPaymentError(errorMessage(error, 'Unable to initialize payment. Please try again.'));
     } finally {
       setIsInitializing(false);
     }
@@ -197,7 +199,7 @@ export default function CheckoutPage() {
 
       clearCart();
       setStep('success');
-    } catch (err: any) {
+    } catch {
       setPaymentError('Payment succeeded but order saving failed. Please contact hello@axonring.com');
     }
   };
