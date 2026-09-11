@@ -1,8 +1,8 @@
 // ── Reviews Service — backed by Supabase ──
 // Reads/writes public.reviews directly. Row level security plus column-level
 // grants mean the publishable key can read approved reviews (without reviewer
-// emails), insert a new review, and bump helpful_count only through the
-// increment_review_helpful RPC.
+// emails) and submit a review for moderation. Helpful voting stays disabled
+// until a rate-limited server endpoint is available.
 
 import { supabase } from './supabase';
 
@@ -27,7 +27,7 @@ export interface ReviewStats {
 export interface ReviewSubmission {
   productId: string;
   reviewerName: string;
-  reviewerEmail?: string;
+  reviewerEmail: string;
   rating: number;
   title: string;
   body: string;
@@ -112,7 +112,7 @@ export async function submitReview(
   const { error } = await supabase.from('reviews').insert({
     product_id: submission.productId,
     reviewer_name: submission.reviewerName,
-    reviewer_email: submission.reviewerEmail || null,
+    reviewer_email: submission.reviewerEmail.trim().toLowerCase(),
     rating: submission.rating,
     title: submission.title,
     body: submission.body,
@@ -123,10 +123,4 @@ export async function submitReview(
   // verified_purchase is decided server-side against orders; until checkout
   // moves to Supabase it always defaults to false.
   return { success: true, verifiedPurchase: false };
-}
-
-export async function markReviewHelpful(reviewId: string): Promise<void> {
-  if (!supabase) return;
-  const { error } = await supabase.rpc('increment_review_helpful', { review_id: reviewId });
-  if (error) throw new Error(error.message);
 }
