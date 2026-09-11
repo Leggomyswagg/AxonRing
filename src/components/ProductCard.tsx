@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Wifi, Heart, ShoppingBag } from 'lucide-react';
 import { useState } from 'react';
+import type { Product } from '@/data/catalog';
 
 interface ProductCardProps {
-  product: any;
+  product: Product;
   featured?: boolean;
 }
 
