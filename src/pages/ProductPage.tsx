@@ -7,12 +7,11 @@ import CartDrawer from '@/components/CartDrawer';
 import {
   Minus, Plus, ShoppingBag, Truck, Shield, RotateCcw,
   Wifi, Activity, Home, ChevronRight, Star, Check,
-  ThumbsUp, BadgeCheck, MessageSquarePlus, X,
+  BadgeCheck, MessageSquarePlus, X,
 } from 'lucide-react';
 import { getProduct, getAccessories, PRODUCTS } from '@/data/catalog';
 import {
   fetchProductReviews,
-  markReviewHelpful,
   submitReview,
   type Review,
 } from '@/lib/reviewsService';
@@ -76,8 +75,8 @@ function ReviewForm({ productId, onSubmitted, onClose }: { productId: string; on
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !title.trim() || rating === 0) {
-      setError('Please fill in your name, title, and select a rating.');
+    if (!name.trim() || !email.trim() || !title.trim() || rating === 0) {
+      setError('Please fill in your name, email, title, and select a rating.');
       return;
     }
     setSubmitting(true);
@@ -87,7 +86,7 @@ function ReviewForm({ productId, onSubmitted, onClose }: { productId: string; on
       await submitReview({
         productId,
         reviewerName:  name.trim(),
-        reviewerEmail: email.trim() || undefined,
+        reviewerEmail: email.trim(),
         rating,
         title:         title.trim(),
         body:          body.trim(),
@@ -121,8 +120,8 @@ function ReviewForm({ productId, onSubmitted, onClose }: { productId: string; on
             <input value={name} onChange={e => setName(e.target.value)} placeholder="Your name" className={ic} required />
           </div>
           <div>
-            <label className="text-sm font-semibold text-zinc-300 mb-2 block">Email <span className="text-zinc-600 font-normal">(for verification)</span></label>
-            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" type="email" className={ic} />
+            <label className="text-sm font-semibold text-zinc-300 mb-2 block">Email * <span className="text-zinc-600 font-normal">(private, for moderation)</span></label>
+            <input value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" type="email" className={ic} required />
           </div>
         </div>
         <div>
@@ -146,17 +145,6 @@ function ReviewForm({ productId, onSubmitted, onClose }: { productId: string; on
 
 // ── Review Card ────────────────────────────────────────────────
 function ReviewCard({ review }: { review: Review }) {
-  const [helpfulCount,   setHelpfulCount]   = useState(review.helpful_count || 0);
-  const [helpfulClicked, setHelpfulClicked] = useState(false);
-
-  const handleHelpful = async () => {
-    if (helpfulClicked) return;
-    setHelpfulClicked(true);
-    setHelpfulCount(c => c + 1);
-    // Optimistic — the count is cosmetic, so a failed vote just stays local.
-    markReviewHelpful(review.id).catch(() => {});
-  };
-
   const timeAgo = (d: string) => {
     const days = Math.floor((Date.now() - new Date(d).getTime()) / 86400000);
     if (days < 1) return 'Today';
@@ -191,12 +179,9 @@ function ReviewCard({ review }: { review: Review }) {
           <span className="text-sm font-medium text-zinc-300">{review.reviewer_name}</span>
           <span className="text-xs text-zinc-600">· {timeAgo(review.created_date)}</span>
         </div>
-        <button onClick={handleHelpful} disabled={helpfulClicked}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${helpfulClicked ? 'bg-zinc-800 text-zinc-300 cursor-default' : 'hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300'}`}
-        >
-          <ThumbsUp className="w-3.5 h-3.5" />
-          Helpful {helpfulCount > 0 && `(${helpfulCount})`}
-        </button>
+        {review.helpful_count > 0 && (
+          <span className="text-xs text-zinc-500">Helpful ({review.helpful_count})</span>
+        )}
       </div>
     </div>
   );
@@ -277,7 +262,7 @@ function ReviewsSection({ productId, seedRating, seedCount }: { productId: strin
           ) : (
             <ReviewForm
               productId={productId}
-              onSubmitted={() => { setSubmitted(true); setShowForm(false); fetchReviews(); }}
+              onSubmitted={() => { setSubmitted(true); fetchReviews(); }}
               onClose={() => setShowForm(false)}
             />
           )}
