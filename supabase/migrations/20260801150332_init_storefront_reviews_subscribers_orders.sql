@@ -8,19 +8,20 @@
 -- ── reviews ──────────────────────────────────────────────────────────
 create table public.reviews (
   id                uuid primary key default gen_random_uuid(),
-  product_id        text        not null,
-  reviewer_name     text        not null,
-  reviewer_email    text,
+  product_id        text        not null check (char_length(product_id) between 1 and 120),
+  reviewer_name     text        not null check (char_length(reviewer_name) between 1 and 80),
+  reviewer_email    text        not null check (char_length(reviewer_email) between 3 and 254),
   rating            smallint    not null check (rating between 1 and 5),
-  title             text,
-  body              text,
+  title             text        not null check (char_length(title) between 1 and 160),
+  body              text        check (body is null or char_length(body) <= 3000),
   verified_purchase boolean     not null default false,
-  helpful_count     integer     not null default 0,
-  approved          boolean     not null default true,
+  helpful_count     integer     not null default 0 check (helpful_count >= 0),
+  approved          boolean     not null default false,
   created_at        timestamptz not null default now()
 );
 
 create index reviews_product_created_idx on public.reviews (product_id, created_at desc);
+create unique index reviews_product_email_uidx on public.reviews (product_id, lower(reviewer_email));
 
 alter table public.reviews enable row level security;
 
@@ -39,32 +40,22 @@ create policy "approved reviews are public"
   on public.reviews for select to anon, authenticated
   using (approved);
 
-create policy "anyone may submit a review"
+create policy "anyone may submit a review for moderation"
   on public.reviews for insert to anon, authenticated
-  with check (true);
+  with check (approved = false and verified_purchase = false and helpful_count = 0);
 
--- Helpful votes: no UPDATE grant is issued, so the only way to touch
--- helpful_count is through this function, which can only ever increment it.
-create function public.increment_review_helpful(review_id uuid)
-  returns void
-  language sql
-  security definer
-  set search_path = public
-as $$
-  update public.reviews
-     set helpful_count = helpful_count + 1
-   where id = review_id and approved;
-$$;
-
-grant execute on function public.increment_review_helpful(uuid) to anon, authenticated;
+-- Helpful voting remains disabled until it can run behind a rate-limited
+-- server endpoint. Never expose a SECURITY DEFINER counter RPC to anon users.
 
 -- ── subscribers ──────────────────────────────────────────────────────
 create table public.subscribers (
   id         uuid primary key default gen_random_uuid(),
-  email      text        not null unique,
-  source     text,
+  email      text        not null check (char_length(email) between 3 and 254),
+  source     text        check (source is null or char_length(source) <= 120),
   created_at timestamptz not null default now()
 );
+
+create unique index subscribers_email_uidx on public.subscribers (lower(email));
 
 alter table public.subscribers enable row level security;
 
