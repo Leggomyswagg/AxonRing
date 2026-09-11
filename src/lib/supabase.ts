@@ -11,12 +11,17 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 
-export const isSupabaseConfigured = Boolean(url && publishableKey);
+export const EXPECTED_SUPABASE_PROJECT_URL = 'https://dxofkkdmrvyizwcdyrks.supabase.co';
+
+export const isSupabaseConfigured = Boolean(
+  url === EXPECTED_SUPABASE_PROJECT_URL &&
+  publishableKey?.startsWith('sb_publishable_')
+);
 
 if (!isSupabaseConfigured && import.meta.env.DEV) {
   console.warn(
     '[supabase] VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY are not set — ' +
-      'reviews and email capture will no-op. Copy .env.example to .env.local.'
+      'reviews and email capture will no-op. Copy .env.example to .env.local and use the active AxonRing DB360 publishable key.'
   );
 }
 
