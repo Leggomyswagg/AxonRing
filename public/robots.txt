@@ -6,6 +6,14 @@ Disallow: /api/
 Disallow: /functions/
 Disallow: /*.json$
 
+# Internal growth tooling — not for indexing
+Disallow: /growth
+
+# Checkout funnel — no SEO value, keeps carts out of the index
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-confirmation
+
 # Crawl rate (optional — be kind to bots)
 Crawl-delay: 1
 

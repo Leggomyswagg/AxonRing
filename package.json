@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/verify-production-env.mjs && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "verify:production-env": "node scripts/verify-production-env.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
