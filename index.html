@@ -1,180 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AxonRing — Programmable NFC Jewelry</title>
+  <meta name="description" content="AxonRing is programmable NFC jewelry for sharing a card, opening a link, and triggering iOS Shortcuts or Android Tasker. No battery. No subscription.">
+  <meta name="theme-color" content="#07111f">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://axonring.com/">
+  <meta property="og:title" content="AxonRing — Programmable NFC Jewelry">
+  <meta property="og:description" content="One ring. Your card, links and automations—without pulling out your phone.">
+  <meta property="og:image" content="https://axonring.com/images/11-product-hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#07111f;--ink2:#0d1a2b;--panel:#101f32;--gold:#d1ad58;--gold2:#f4d98c;--paper:#f3f0e8;--white:#fff;--muted:#aab5c5;--line:rgba(209,173,88,.22);--max:1180px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--white);font:400 16px/1.6 Manrope,system-ui,sans-serif}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}img{display:block;max-width:100%}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.eyebrow{color:var(--gold2);font-size:.76rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}.announcement{padding:9px 16px;background:var(--gold);color:var(--ink);text-align:center;font-size:.78rem;font-weight:600}.nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(7,17,31,.9);backdrop-filter:blur(18px)}.navin{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font:600 1.04rem DM Sans;letter-spacing:.2em}.brand span{color:var(--gold)}.links{display:flex;gap:24px;color:var(--muted);font-size:.82rem}.links a:hover{color:var(--white)}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border:1px solid transparent;border-radius:999px;background:none;color:var(--white);font-size:.83rem;font-weight:600;letter-spacing:.05em;cursor:pointer;transition:.2s}.btn.primary{background:var(--gold);color:var(--ink)}.btn.primary:hover{background:var(--gold2);transform:translateY(-1px)}.btn.ghost{border-color:var(--line)}.btn.ghost:hover{border-color:var(--gold)}
+    .hero{min-height:700px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:84px 0}.hero h1,.section h2{font-family:DM Sans,sans-serif;letter-spacing:-.055em;line-height:1.02}.hero h1{font-size:clamp(3rem,6vw,5.8rem);font-weight:500;margin:18px 0 24px}.hero h1 em{font-style:normal;color:var(--gold2)}.lead{max-width:600px;color:var(--muted);font-size:1.12rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0}.trust{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.8rem}.trust span:before{content:'✓';color:var(--gold);margin-right:7px}.visual{position:relative;border-radius:32px;overflow:hidden;background:var(--panel);box-shadow:0 30px 90px rgba(0,0,0,.32)}.visual img{width:100%;aspect-ratio:4/5;object-fit:cover}.visual-note{position:absolute;left:18px;right:18px;bottom:18px;padding:16px 18px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(7,17,31,.78);backdrop-filter:blur(16px);font-size:.82rem}.visual-note strong{color:var(--gold2)}
+    .section{padding:104px 0}.section.alt{background:var(--paper);color:var(--ink)}.head{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:46px}.head>div{max-width:720px}.section h2{font-size:clamp(2.2rem,4.4vw,4.2rem);font-weight:500;margin:12px 0}.head p{max-width:520px;color:#536073}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:30px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}.alt .card{border-color:#d9d3c5;background:#fff}.card .tag{color:var(--gold2);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}.alt .card .tag{color:#896816}.card h3{font:500 1.45rem DM Sans;margin:34px 0 10px}.card p{color:var(--muted);font-size:.92rem}.alt .card p{color:#536073}.tap-demo{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.phone{min-height:490px;padding:34px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#142943,#0b1626);display:flex;flex-direction:column;justify-content:space-between}.screen{border:1px solid rgba(255,255,255,.13);border-radius:24px;background:#06101d;padding:22px}.screen-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em}.screen h3{font:500 1.6rem DM Sans;margin:20px 0 8px}.screen a{color:var(--gold2);font-size:.88rem}.composer{padding:34px;border:1px solid var(--line);border-radius:28px;background:var(--panel)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.tab{border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);padding:10px 14px;cursor:pointer}.tab.active{background:var(--gold);color:var(--ink);border-color:var(--gold)}label{display:block;color:var(--muted);font-size:.82rem;margin:16px 0 7px}.field{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:12px;background:#081525;color:white;outline:none}.field:focus{border-color:var(--gold)}.helper{color:var(--muted);font-size:.76rem;margin-top:10px}
+    .lines{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.line{position:relative;min-height:440px;padding:38px;border:1px solid var(--line);border-radius:28px;background:var(--panel);overflow:hidden}.line.available{background:linear-gradient(145deg,#132841,#0b1828)}.line .state{display:inline-block;padding:7px 11px;border-radius:999px;background:rgba(209,173,88,.12);color:var(--gold2);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.line h3{font:500 clamp(2rem,4vw,3.4rem)/1.05 DM Sans;margin:70px 0 14px}.line p{max-width:520px;color:var(--muted)}.line .price{font:500 1.7rem DM Sans;color:var(--gold2);margin:24px 0}.line.future{background:transparent}.line.future h3{margin-top:70px}.line.future:after{content:'RESEARCH';position:absolute;right:-30px;bottom:35px;color:rgba(255,255,255,.035);font:600 4.8rem DM Sans;transform:rotate(-90deg)}
+    .products{display:grid;grid-template-columns:1fr 1fr;gap:18px}.product{padding:34px;border:1px solid #d9d3c5;border-radius:26px;background:#fff}.product .price{font:500 2rem DM Sans;margin:16px 0}.product ul{padding-left:19px;color:#536073}.product li{margin:7px 0}.product.featured{background:var(--ink);color:white;border-color:var(--ink)}.product.featured ul{color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}.step{padding:22px;border-top:1px solid #cfc7b7}.step b{display:block;color:#896816;font-size:.72rem;letter-spacing:.12em;margin-bottom:20px}.step h4{font:500 1.05rem DM Sans;margin:0 0 8px}.step p{color:#536073;font-size:.82rem}
+    .specgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px}.cutaway{padding:38px;border:1px solid var(--line);border-radius:28px;background:var(--panel)}.ring-diagram{height:270px;display:grid;place-items:center}.ring{width:220px;height:220px;border:36px solid #d9dce2;border-radius:50%;box-shadow:inset 0 0 0 6px #767f8a,0 18px 50px rgba(0,0,0,.35);position:relative}.chip{position:absolute;right:-31px;top:70px;width:40px;height:70px;border-radius:8px;background:linear-gradient(135deg,var(--gold2),#8d671e);box-shadow:0 0 0 6px #0d1a2b}.legend{display:grid;gap:12px;color:var(--muted);font-size:.84rem}.legend b{color:white}.specs{border:1px solid var(--line);border-radius:28px;overflow:hidden}.spec{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:20px 24px;border-bottom:1px solid var(--line)}.spec:last-child{border:0}.spec b{font-size:.8rem;color:var(--gold2)}.spec span{color:var(--muted);font-size:.88rem}.founder{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}.founder img{width:100%;height:100%;min-height:430px;object-fit:cover;border-radius:28px}.story{padding:44px;border:1px solid #d9d3c5;border-radius:28px;background:white}.story blockquote{font:500 clamp(1.8rem,3vw,3rem)/1.15 DM Sans;letter-spacing:-.04em;margin:30px 0}.story p{color:#536073}.wait{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:46px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(115deg,#132a46,#0b1727)}.wait h2{margin:8px 0;font-size:clamp(2rem,4vw,3.6rem)}.wait p{color:var(--muted);max-width:680px}.faq details{padding:20px 0;border-bottom:1px solid var(--line)}.faq summary{cursor:pointer;font-weight:600}.faq p{color:var(--muted);max-width:800px}.footer{padding:42px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}.footerin{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footlinks{display:flex;gap:18px;flex-wrap:wrap}
+    .modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:20px;background:rgba(3,8,15,.82);backdrop-filter:blur(10px)}.modal.open{display:grid}.modalbox{width:min(620px,100%);max-height:92vh;overflow:auto;padding:32px;border:1px solid var(--line);border-radius:26px;background:var(--ink2)}.modalhead{display:flex;justify-content:space-between;gap:18px}.close{border:0;background:none;color:white;font-size:1.7rem;cursor:pointer}.modal h3{font:500 2rem DM Sans;margin:0}.modal .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.success{display:none;padding:18px;border:1px solid var(--line);border-radius:14px;color:var(--gold2)}
+    @media(max-width:900px){.links{display:none}.hero,.tap-demo,.lines,.products,.specgrid,.founder{grid-template-columns:1fr}.hero{padding:56px 0}.hero h1{font-size:clamp(2.8rem,14vw,4.6rem)}.cards,.flow{grid-template-columns:1fr 1fr}.head{display:block}.line{min-height:auto}.line h3{margin-top:44px}.visual img{aspect-ratio:1/1}.wait{grid-template-columns:1fr}.spec{grid-template-columns:125px 1fr}}
+    @media(max-width:580px){.wrap{width:min(var(--max),calc(100% - 24px))}.announcement{font-size:.7rem}.navin{height:62px}.nav .btn{display:none}.hero{min-height:auto}.hero h1{font-size:2.8rem}.section{padding:72px 0}.cards,.flow{grid-template-columns:1fr}.card,.product,.composer,.phone,.line,.story,.wait,.cutaway{padding:24px}.modal .row{grid-template-columns:1fr}.spec{grid-template-columns:1fr;gap:5px}.ring{transform:scale(.82)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="announcement">Free sizing kit first · Sizes 6–13 · 30-day fit returns</div>
+  <header class="nav"><div class="wrap navin"><a class="brand" href="/">AXON<span>RING</span></a><nav class="links" aria-label="Main navigation"><a href="#line-a">NFC rings</a><a href="#studio">AxonRing Studio</a><a href="#specs">Specs</a><a href="#line-b">Sensor research</a><a href="#story">Our story</a></nav><button class="btn primary" data-open="sizing">Get sizing kit</button></div></header>
+  <main>
+    <section class="wrap hero"><div><div class="eyebrow">Passive NFC jewelry · Available first</div><h1>Wear the shortcut.<br><em>Skip the phone.</em></h1><p class="lead">AxonRing is programmable NFC jewelry for people who already wear rings—and hate pulling out a phone to share a card, open a link, or trigger Shortcuts and Tasker.</p><div class="actions"><a class="btn primary" href="#line-a">Choose your ring</a><a class="btn ghost" href="#studio">Try the software</a></div><div class="trust"><span>No battery</span><span>No subscription</span><span>Rewrite anytime</span><span>Tap recipient needs no app</span></div></div><figure class="visual"><img src="https://axon-ring-com.vercel.app/images/4-professional-office.jpg" alt="AxonRing worn as everyday jewelry" fetchpriority="high"><figcaption class="visual-note"><strong>One clear job.</strong> Share and automate with a tap. Health tracking is a separate research program.</figcaption></figure></section>
 
-    <!-- ── Primary Meta ── -->
-    <title>AxonRing — NFC Smart Rings | Tap to Pay, Access & Connect</title>
-    <meta name="description" content="AxonRing smart rings combine premium craftsmanship with advanced NFC technology. Tap to pay, unlock doors, share contact info and more. Free shipping over $199." />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#0f172a" />
-    <link rel="canonical" href="https://axonring.com/" />
+    <section class="section alt"><div class="wrap"><div class="head"><div><div class="eyebrow" style="color:#896816">What a tap can do</div><h2>Your most useful links, worn.</h2></div><p>Hold the ring near the NFC reader on a compatible phone. The saved action opens instantly.</p></div><div class="cards"><article class="card"><span class="tag">Share</span><h3>Contact or portfolio</h3><p>Open a vCard, LinkedIn, portfolio, menu, booking page, or any public URL.</p></article><article class="card"><span class="tag">Automate</span><h3>Shortcuts or Tasker</h3><p>Use the ring as the physical trigger for an iOS Shortcut, Android intent, or Tasker flow.</p></article><article class="card"><span class="tag">Connect</span><h3>Wi-Fi or check-in</h3><p>Share guest Wi-Fi details or open your gym, event, attendance, and check-in URL.</p></article></div></div></section>
 
-    <!-- ── Open Graph ── -->
-    <meta property="og:site_name"    content="AxonRing" />
-    <meta property="og:title"        content="AxonRing — The Future On Your Finger" />
-    <meta property="og:description"  content="Premium NFC smart rings. Tap to pay, unlock, and connect. Shop the full collection." />
-    <meta property="og:type"         content="website" />
-    <meta property="og:url"          content="https://axonring.com/" />
-    <meta property="og:image"        content="https://axonring.com/og.jpg" />
-    <meta property="og:image:width"  content="1200" />
-    <meta property="og:image:height" content="630" />
+    <section id="studio" class="section"><div class="wrap"><div class="head"><div><div class="eyebrow">AxonRing Studio · Interactive preview</div><h2>Program the experience.</h2></div><p>The dashboard formats what you want to write. Final writing occurs through your phone’s NFC writer.</p></div><div class="tap-demo"><div class="phone"><div class="screen"><span class="screen-label">Tap preview</span><h3 id="previewTitle">Alex Morgan</h3><p id="previewText">Digital business card</p><a id="previewLink" href="#">axonring.com/alex</a></div><span class="helper">Recipient view · no AxonRing app required</span></div><div class="composer"><div class="eyebrow">Choose an NFC action</div><div class="tabs" role="tablist"><button class="tab active" data-type="card">vCard</button><button class="tab" data-type="calendar">Calendly</button><button class="tab" data-type="portfolio">Portfolio</button><button class="tab" data-type="wifi">Guest Wi-Fi</button><button class="tab" data-type="gym">Gym URL</button><button class="tab" data-type="automation">Automation</button></div><label for="displayName">Display name</label><input class="field" id="displayName" value="Alex Morgan"><label for="destination">Destination or public URL</label><input class="field" id="destination" value="https://axonring.com/alex"><p class="helper" id="typeHelp">Share a contact card or profile page.</p><div class="actions"><button class="btn primary" id="previewBtn">Preview tap</button><a class="btn ghost" href="#guides">Setup guides</a></div><p class="helper">UID locking depends on the exact chip and writer. AxonRing never promises cloning or access-system compatibility.</p></div></div></div></section>
 
-    <!-- ── Twitter Card ── -->
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:site"        content="@axonring" />
-    <meta name="twitter:title"       content="AxonRing — NFC Smart Rings" />
-    <meta name="twitter:description" content="Tap to pay, unlock, and connect. Premium NFC smart rings starting at $139." />
-    <meta name="twitter:image"       content="https://axonring.com/og.jpg" />
+    <section id="line-a" class="section"><div class="wrap"><div class="head"><div><div class="eyebrow">Two lines. Never one product page.</div><h2>Available now versus under research.</h2></div></div><div class="lines"><article class="line available"><span class="state">Line A · Passive NFC</span><h3>AxonRing NFC</h3><p>Battery-free ceramic jewelry built around an NTAG216 tag for links, contact sharing, and phone automations.</p><div class="price">From $129</div><button class="btn primary" data-open="sizing">Start with a free sizing kit</button></article><article class="line future" id="line-b"><span class="state">Line B · Sensor research</span><h3>AxonRing Sense</h3><p>Not for sale. This line will not launch until AxonRing has a working PPG + temperature prototype, published accuracy results, and a usable app. No health promises are attached to Line A.</p><div class="actions"><button class="btn ghost" data-open="sensor">Join the research waitlist</button></div></article></div></div></section>
 
-    <!-- ── Favicon ── -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png"     href="/favicon.png" sizes="32x32" />
-    <link rel="apple-touch-icon"          href="/apple-touch-icon.png" />
+    <section class="section alt"><div class="wrap"><div class="head"><div><div class="eyebrow" style="color:#896816">Line A collection</div><h2>Jewelry first. Utility inside.</h2></div><p>Pricing stays inside the premium NFC-jewelry category—not speculative health hardware.</p></div><div class="products"><article class="product"><div class="eyebrow" style="color:#896816">Ceramic NFC</div><h3>AxonRing Core</h3><div class="price">$129</div><p>Minimal black ceramic for everyday sharing and automations.</p><ul><li>NTAG216 · 888 bytes total memory</li><li>US sizes 6–13</li><li>Free sizing kit ships first</li><li>30-day fit returns</li><li>1-year limited warranty</li></ul><button class="btn primary" data-open="sizing">Get sizing kit</button></article><article class="product featured"><div class="eyebrow">Gold-tone prestige</div><h3>AxonRing Prestige</h3><div class="price">$299</div><p>A polished, jewelry-led finish with the same honest NFC capabilities.</p><ul><li>Same NTAG216 NFC utility</li><li>Gold-tone finish and presentation box</li><li>US sizes 6–13</li><li>Free sizing kit ships first</li><li>30-day fit returns</li><li>2-year limited warranty</li></ul><button class="btn primary" data-open="sizing">Get sizing kit</button></article></div><div class="flow"><div class="step"><b>01</b><h4>Request kit</h4><p>Choose a line and share where to send it.</p></div><div class="step"><b>02</b><h4>Wear test</h4><p>Test sizes 6–13 across a full day.</p></div><div class="step"><b>03</b><h4>Confirm fit</h4><p>Select the finger and size you will actually wear.</p></div><div class="step"><b>04</b><h4>Ring ships</h4><p>Your chosen ring ships after size confirmation.</p></div></div></div></section>
 
-    <!-- ── Security Headers (meta fallbacks) ── -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options"        content="DENY" />
-    <meta http-equiv="Referrer-Policy"        content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy"     content="camera=(), microphone=(), geolocation=(), payment=(self)" />
-    <meta http-equiv="Content-Security-Policy" content="
-      default-src 'self';
-      script-src  'self' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com;
-      style-src   'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src    'self' https://fonts.gstatic.com;
-      img-src     'self' data: blob: https://d64gsuwffb70l.cloudfront.net https://*.cloudfront.net https://www.google-analytics.com https://www.googletagmanager.com;
-      connect-src 'self'
-                  https://api.stripe.com
-                  https://tek-agent-65076290.base44.app
-                  https://www.google-analytics.com
-                  https://analytics.google.com
-                  https://region1.google-analytics.com;
-      frame-src   https://js.stripe.com https://hooks.stripe.com;
-      object-src  'none';
-      base-uri    'self';
-      form-action 'self';
-    " />
+    <section id="specs" class="section"><div class="wrap"><div class="head"><div><div class="eyebrow">What is inside</div><h2>Publish the chip, not mythology.</h2></div><p>The ring is simple by design: ceramic shell, antenna, and passive NFC chip.</p></div><div class="specgrid"><div class="cutaway"><div class="ring-diagram" role="img" aria-label="Simplified cutaway showing the ceramic shell and NFC chip"><div class="ring"><span class="chip"></span></div></div><div class="legend"><span><b>Ceramic shell</b> — wearable, battery-free enclosure</span><span><b>Antenna + NTAG216</b> — receives power from the reader field</span><span><b>No sensors</b> — no PPG, ECG, GPS, display, or health measurement</span></div></div><div class="specs"><div class="spec"><b>Chip</b><span>NXP NTAG216</span></div><div class="spec"><b>Memory</b><span>888 bytes total; available NDEF capacity is lower after formatting and records</span></div><div class="spec"><b>Frequency</b><span>13.56 MHz · NFC Forum Type 2 / ISO 14443-A</span></div><div class="spec"><b>Power</b><span>Passive · no battery · no charging</span></div><div class="spec"><b>Sizes</b><span>US 6–13 · sizing kit first</span></div><div class="spec"><b>Water rating</b><span>ATM rating not yet published. Avoid submersion until a tested rating is posted.</span></div><div class="spec"><b>Payments</b><span>Can open a payment link. It does not make card-terminal payments.</span></div><div class="spec"><b>Compatibility</b><span>NFC-capable phones; scan location and automation behavior vary by device</span></div></div></div></div></section>
 
-    <!-- ── Google Analytics 4 ── -->
-    <!-- IMPORTANT: Replace G-XXXXXXXXXX with your real GA4 Measurement ID -->
-    <!-- Find it in Google Analytics → Admin → Data Streams → your stream -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', {
-        page_title:    document.title,
-        page_location: window.location.href,
-        // Enhanced ecommerce
-        send_page_view: true,
-      });
+    <section id="story" class="section alt"><div class="wrap founder"><img src="https://axon-ring-com.vercel.app/images/9-social-dinner.jpg" alt="AxonRing jewelry shown in a real social setting" loading="lazy"><article class="story"><div class="eyebrow" style="color:#896816">Founder + factory standard</div><blockquote>“Technology should disappear into what you already choose to wear.”</blockquote><p>AxonRing was founded around a narrow belief: useful NFC does not need to look like a gadget. Line A is intentionally passive, programmable, and battery-free. We publish the chip and the limitations because trust matters more than a long feature list.</p><p>Factory partners are required to document chip identity, size tolerances, finish materials, and batch-level quality checks. Supplier names and verified production photos will be added only with permission and evidence—never invented for marketing.</p><a class="btn" style="border-color:#cfc7b7;color:#07111f" href="mailto:hello@axonring.com?subject=AxonRing%20factory%20documentation">Request sourcing documentation</a></article></div></section>
 
-      // ── GA4 helper exposed globally for React ──
-      window.trackEvent = function(eventName, params) {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', eventName, params || {});
-        }
-      };
-    </script>
+    <section id="guides" class="section"><div class="wrap"><div class="head"><div><div class="eyebrow">Setup guides</div><h2>NFC software, documented honestly.</h2></div></div><div class="cards"><article class="card"><span class="tag">iPhone</span><h3>Shortcuts</h3><p>In Shortcuts, create a Personal Automation using NFC, scan the ring, add actions, and disable confirmation only when appropriate. Availability varies by iOS version and device.</p></article><article class="card"><span class="tag">Android</span><h3>Tasker + intents</h3><p>Write a URL or use the NFC Tag trigger in Tasker. Android background execution and intent behavior depend on your phone’s settings.</p></article><article class="card"><span class="tag">Privacy</span><h3>Write only public data</h3><p>Anyone with an NFC-capable phone may read an unlocked tag. Never store passwords, private keys, or sensitive personal data.</p></article></div><div class="faq" style="margin-top:40px"><details><summary>Can AxonRing pay at a store terminal?</summary><p>No. Line A can open a payment link on a phone. It is not Apple Pay, a Visa card, or an issuer-tokenized payment credential.</p></details><details><summary>Can it measure health or location?</summary><p>No. Line A contains no health sensor, GPS, or display. Line B is a separate research waitlist and is not for sale.</p></details><details><summary>Can I lock the tag?</summary><p>NTAG216 supports lock features, but some changes can be permanent and tool support varies. Follow the documented workflow and verify the final record before applying any permanent lock.</p></details></div></div></section>
 
-    <!-- ── Structured Data: Organization ── -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "AxonRing",
-      "url": "https://axonring.com",
-      "logo": "https://axonring.com/favicon.svg",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "hello@axonring.com",
-        "contactType": "customer support"
-      },
-      "sameAs": ["https://axonring.store"]
-    }
-    </script>
+    <section class="section"><div class="wrap wait"><div><div class="eyebrow">Choose the real product</div><h2>Start with fit. Then choose the finish.</h2><p>Request the free sizing kit before your ring is finalized. You will receive availability and checkout instructions after size confirmation so the offer and charged price always match.</p></div><button class="btn primary" data-open="sizing">Get the sizing kit</button></div></section>
+  </main>
+  <footer class="footer"><div class="wrap footerin"><span>© 2026 AxonRing Holdings Group LLC</span><div class="footlinks"><a href="#specs">Full specs</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="mailto:support@axonring.com">Support</a></div></div></footer>
 
-    <!-- ── Structured Data: WebSite + SearchAction ── -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "AxonRing",
-      "url": "https://axonring.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://axonring.com/?search={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-
-    <!-- ── Structured Data: Product Catalog (ItemList) ── -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "name": "AxonRing NFC Smart Rings",
-      "url": "https://axonring.com",
-      "itemListElement": [
-        {
-          "@type": "ListItem", "position": 1,
-          "item": {
-            "@type": "Product",
-            "name": "AxonRing Adventure",
-            "description": "Military-grade titanium NFC smart ring for the adventurous. Contactless payments, GPS, heart rate.",
-            "url": "https://axonring.com",
-            "image": "https://d64gsuwffb70l.cloudfront.net/69afc9463ade716221889914_1773187931200_ec86bb2a.png",
-            "brand": { "@type": "Brand", "name": "AxonRing" },
-            "offers": {
-              "@type": "Offer", "priceCurrency": "USD", "price": "219.99",
-              "availability": "https://schema.org/InStock",
-              "url": "https://axonring.com"
-            },
-            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "342" }
-          }
-        },
-        {
-          "@type": "ListItem", "position": 2,
-          "item": {
-            "@type": "Product",
-            "name": "AxonRing Balance",
-            "description": "Wellness-focused NFC ring with stress & SpO2 monitoring.",
-            "url": "https://axonring.com",
-            "brand": { "@type": "Brand", "name": "AxonRing" },
-            "offers": {
-              "@type": "Offer", "priceCurrency": "USD", "price": "169.99",
-              "availability": "https://schema.org/InStock",
-              "url": "https://axonring.com"
-            },
-            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "218" }
-          }
-        },
-        {
-          "@type": "ListItem", "position": 3,
-          "item": {
-            "@type": "Product",
-            "name": "AxonRing Elite",
-            "description": "Top-tier NFC smart ring — premium materials, advanced health tracking.",
-            "url": "https://axonring.com",
-            "brand": { "@type": "Brand", "name": "AxonRing" },
-            "offers": {
-              "@type": "Offer", "priceCurrency": "USD", "price": "399.99",
-              "availability": "https://schema.org/InStock",
-              "url": "https://axonring.com"
-            },
-            "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "189" }
-          }
-        }
-      ]
-    }
-    </script>
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <div class="modal" id="sizing" role="dialog" aria-modal="true" aria-labelledby="sizingTitle"><form class="modalbox" data-form="Sizing kit request"><div class="modalhead"><div><div class="eyebrow">Free sizing kit</div><h3 id="sizingTitle">Find your fit first.</h3></div><button class="close" type="button" data-close aria-label="Close">×</button></div><div class="row"><div><label for="firstName">First name</label><input class="field" id="firstName" name="first_name" required></div><div><label for="lastName">Last name</label><input class="field" id="lastName" name="last_name" required></div></div><label for="email">Email</label><input class="field" id="email" name="email" type="email" required><label for="finish">Ring interest</label><select class="field" id="finish" name="ring_interest"><option>AxonRing Core — $129</option><option>AxonRing Prestige — $299</option><option>Not sure yet</option></select><label for="location">Shipping city + country</label><input class="field" id="location" name="location" required><div class="actions"><button class="btn primary" type="submit">Prepare request</button></div><p class="helper">This creates a prefilled email to the AxonRing team. No card is charged.</p><div class="success">Your email app is opening with the sizing request prepared.</div></form></div>
+  <div class="modal" id="sensor" role="dialog" aria-modal="true" aria-labelledby="sensorTitle"><form class="modalbox" data-form="AxonRing Sense research waitlist"><div class="modalhead"><div><div class="eyebrow">Research waitlist</div><h3 id="sensorTitle">Follow Line B progress.</h3></div><button class="close" type="button" data-close aria-label="Close">×</button></div><label for="sensorEmail">Email</label><input class="field" id="sensorEmail" name="email" type="email" required><label for="priority">Which evidence matters most?</label><select class="field" id="priority" name="priority"><option>Published accuracy validation</option><option>Battery life and comfort</option><option>Temperature trends</option><option>PPG heart-rate performance</option><option>App experience</option></select><div class="actions"><button class="btn primary" type="submit">Join research waitlist</button></div><p class="helper">Waitlist only. No deposit and no promise of a launch date.</p><div class="success">Your email app is opening with the waitlist request prepared.</div></form></div>
+  <script>
+    const copy={card:['Digital business card','Share a contact card or profile page.'],calendar:['Booking page','Open your Calendly or booking URL.'],portfolio:['Portfolio','Open a selected work or portfolio page.'],wifi:['Guest Wi-Fi','Share a guest network record; support varies by phone.'],gym:['Check-in','Open a gym, event, or attendance URL.'],automation:['Phone automation','Use the tag as an iOS Shortcuts or Android Tasker trigger.']};
+    let active='card';
+    document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));tab.classList.add('active');active=tab.dataset.type;document.getElementById('typeHelp').textContent=copy[active][1];}));
+    document.getElementById('previewBtn').addEventListener('click',()=>{const name=document.getElementById('displayName').value.trim()||copy[active][0];const url=document.getElementById('destination').value.trim()||'Your saved destination';document.getElementById('previewTitle').textContent=name;document.getElementById('previewText').textContent=copy[active][0];document.getElementById('previewLink').textContent=url.replace(/^https?:\/\//,'');document.getElementById('previewLink').href=url.startsWith('http')?url:'#';});
+    const closeAll=()=>document.querySelectorAll('.modal.open').forEach(x=>x.classList.remove('open'));
+    document.querySelectorAll('[data-open]').forEach(btn=>btn.addEventListener('click',()=>{closeAll();document.getElementById(btn.dataset.open).classList.add('open');document.body.style.overflow='hidden';}));
+    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>{closeAll();document.body.style.overflow='';}));
+    document.querySelectorAll('.modal').forEach(modal=>modal.addEventListener('click',e=>{if(e.target===modal){closeAll();document.body.style.overflow='';}}));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeAll();document.body.style.overflow='';}});
+    document.querySelectorAll('[data-form]').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(form);const lines=[...data.entries()].map(([k,v])=>`${k.replaceAll('_',' ')}: ${v}`);const subject=encodeURIComponent(form.dataset.form);const body=encodeURIComponent(lines.join('\n'));form.querySelector('.success').style.display='block';window.location.href=`mailto:hello@axonring.com?subject=${subject}&body=${body}`;}));
+  </script>
+</body>
 </html>
