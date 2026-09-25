@@ -114,7 +114,7 @@
           const interest=(data.ring_interest||'').toLowerCase().includes('prestige')?'prestige':(data.ring_interest||'').toLowerCase().includes('core')?'core':'undecided';
           await track('sizing_kit_requested',{form:{email:data.email,product_interest:interest,requested_size:'sizing_kit',country:data.location},properties:{flow:'fit_first'}});
         }else{
-          await track('founding_member_signed_up',{form:{email:data.email,product_interest:'undecided'},properties:{flow:'sensor_research_waitlist',priority:data.priority}});
+          await track('research_waitlist_signed_up',{form:{email:data.email,product_interest:'undecided'},properties:{flow:'sensor_research_waitlist',priority:data.priority}});
         }
         success.style.display='block';form.reset();
       }catch(error){success.textContent='We could not save your request. Please try again or email support@axonring.com.';success.style.display='block';success.style.color='#ffb4a8';}
