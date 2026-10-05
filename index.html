@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script>
-    (()=>{const idKey='axonring_anonymous_id',variantKey='axonring_exp_logo_mark_v1';let id=localStorage.getItem(idKey);if(!id){id=crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();localStorage.setItem(idKey,id)}let variant=localStorage.getItem(variantKey);if(!['angular_a','circular_a_dot'].includes(variant)){let hash=2166136261;for(let i=0;i<id.length;i++){hash^=id.charCodeAt(i);hash=Math.imul(hash,16777619)}variant=(hash>>>0)%2===0?'angular_a':'circular_a_dot';localStorage.setItem(variantKey,variant)}document.documentElement.dataset.logoVariant=variant;window.AXONRING_LOGO_VARIANT=variant})();
+    (()=>{const allowed=['angular_a','circular_a_dot'],query=new URLSearchParams(location.search),forced=query.get('logo_variant'),qa=query.get('qa')==='logo-test'&&allowed.includes(forced),idKey='axonring_anonymous_id',variantKey='axonring_exp_logo_mark_v1';let id=localStorage.getItem(idKey);if(!id){id=crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();localStorage.setItem(idKey,id)}let variant=qa?forced:localStorage.getItem(variantKey);if(!allowed.includes(variant)){let hash=2166136261;for(let i=0;i<id.length;i++){hash^=id.charCodeAt(i);hash=Math.imul(hash,16777619)}variant=(hash>>>0)%2===0?'angular_a':'circular_a_dot';localStorage.setItem(variantKey,variant)}document.documentElement.dataset.logoVariant=variant;window.AXONRING_LOGO_VARIANT=variant;window.AXONRING_LOGO_QA=qa})();
   </script>
   <style>
     :root{--ink:#07111f;--ink2:#0d1a2b;--panel:#101f32;--gold:#d1ad58;--gold2:#f4d98c;--paper:#f3f0e8;--white:#fff;--muted:#aab5c5;--line:rgba(209,173,88,.22);--max:1180px}
@@ -90,6 +90,7 @@
     let firstTouch;try{firstTouch=JSON.parse(localStorage.getItem('axonring_first_touch'))}catch{}
     if(!firstTouch){firstTouch=currentTouch;localStorage.setItem('axonring_first_touch',JSON.stringify(firstTouch))}
     async function track(event_name,{form={},properties={},marketing}={}){
+      if(window.AXONRING_LOGO_QA)return {qa:true};
       const consent={analytics:true};if(typeof marketing==='boolean')consent.marketing=marketing;
       const response=await fetch(EVENTS_URL,{method:'POST',headers:{'Content-Type':'application/json','X-AxonRing-Source':'axonring.com'},body:JSON.stringify({event_name,event_id:uuid(),anonymous_id:anonymousId,session_id:sessionId,occurred_at:new Date().toISOString(),attribution:{...currentTouch,first_touch:firstTouch},consent,form,properties,experiment:{key:'logo_mark_v1',variant:window.AXONRING_LOGO_VARIANT}})});
       const result=await response.json().catch(()=>({}));
