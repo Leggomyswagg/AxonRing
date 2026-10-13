@@ -1,0 +1,11 @@
+.purchase-form { margin-top: 24px; }
+.purchase-form[hidden] { display: none; }
+.purchase-form .purchase-fields { display: grid; grid-template-columns: 1fr 96px; gap: 12px; margin-bottom: 16px; }
+.purchase-form label { display: block; font-size: 13px; margin-bottom: 6px; }
+.purchase-form .field { width: 100%; min-height: 44px; }
+.purchase-form .btn { width: 100%; min-height: 48px; }
+.purchase-form .btn:disabled { opacity: .5; cursor: not-allowed; }
+.purchase-form :focus-visible { outline: 2px solid #c9a04c; outline-offset: 3px; }
+.purchase-status { font-size: 13px; line-height: 1.6; min-height: 42px; margin: 14px 0; }
+.purchase-policies { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12px; margin-top: 14px; }
+.purchase-policies a { text-decoration: underline; text-underline-offset: 3px; }

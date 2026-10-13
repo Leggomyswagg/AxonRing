@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/catalog.js": { "maxDuration": 60 },
+    "api/checkout.js": { "maxDuration": 60 }
+  }
+}
