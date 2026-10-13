@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "^(?:[a-z0-9-]+\\.)*axonring\\.(?:net|shop)$"
+        }
+      ],
+      "mitigate": { "action": "deny" }
+    },
+    { "handle": "filesystem" }
+  ]
+}
