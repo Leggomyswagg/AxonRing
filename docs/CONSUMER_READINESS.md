@@ -4,6 +4,8 @@ This change prepares the purchase flow in `Leggomyswagg/AxonRing`, the repositor
 
 Live commerce is **disabled by default**. The connected Shopify account currently rejects API access, and no CJ account credentials or approved product/size mappings are available in this task. The existing Supabase request intake remains the route for sizing, research, and Founding Member submissions.
 
+The product scope is passive NFC rings. [SUPPLIER_OPTIONS.md](SUPPLIER_OPTIONS.md) compares alternate fulfillment and manufacturer leads, with an unsent sourcing brief and sample checks. No alternative supplier is connected or approved, and the current product claims still need confirmation against an exact physical sample.
+
 ## Implemented flow
 
 1. The browser requests `/api/catalog` and displays actual Shopify variant prices, size options, quantity rules, and inventory only after the configured CJ shop and every listed supplier connection verify.
@@ -44,9 +46,9 @@ npm run test:commerce
 npm run build
 ```
 
-The combined automated suite currently has 91 passing checks, covering supplier authorization/mappings, merchant prices, stock changes, size/product mismatches, cart adjustments, request validation, and safe failure behavior. Desktop and mobile Chromium checks pass with mocked providers, including unavailable stock, checkout payloads, blocked browser storage, and retry after a failed request submission. No real order or customer record is created by these checks.
+The combined automated suite currently has 93 passing checks, covering supplier authorization/mappings, merchant prices, stock changes, size/product mismatches, cart adjustments, request validation, and safe failure behavior. CJ request spacing is measured after the transport is invoked; regression cases cover synchronous startup delays and transport failure recovery. Desktop and mobile Chromium checks pass with mocked providers, including unavailable stock, checkout payloads, blocked browser storage, and retry after a failed request submission. No real order or customer record is created by these checks.
 
-The shipped Shopify helper is missing its bundled schema/version-data files, so its exact `2026-10` validation is blocked. The operations pass independent compatibility validation against Shopify's official `2026-04` schema from `@shopify/hydrogen-react` 2026.4.4; their fields were also reviewed in the current `2026-10` API references. This compatibility evidence does not replace an authenticated `2026-10` staging test after merchant access is restored. GitHub Actions runs the mocked suite and production build on pull requests and `main` changes.
+The older shipped Shopify helper is missing its exact `2026-10` schema/version data. The operations pass independent compatibility validation against Shopify's official `2026-04` schema and were reviewed in the current `2026-10` references. The native Shopify MCP validator subsequently validated both Storefront operations against its supplied schema, without returning a version stamp. Exact `2026-10` authenticated staging remains pending; a fresh merchant identity read still reports `operation_not_allowed`. GitHub Actions runs the mocked suite and production build on pull requests and `main` changes.
 
 Official references:
 

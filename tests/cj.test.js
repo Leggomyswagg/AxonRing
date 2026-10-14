@@ -415,3 +415,38 @@ test('spaces concurrent request starts and drops queued requests after the verif
   await rejectsCode(deadline.client.verifyConnection(mapping), 'CJ_UPSTREAM_TIMEOUT');
   assert.equal(deadline.calls.length, 1, 'expired connection never leaves the queue');
 });
+
+test('preserves request spacing when the transport performs synchronous startup work', async () => {
+  const starts = [];
+  const client = createCjClient({
+    env, requestIntervalMs: 25, verificationTimeoutMs: 1000,
+    fetchImpl: (url) => {
+      // Simulate setup before the first transport request actually starts.
+      // This exceeds the interval and exposes scheduling-time reservations.
+      if (!starts.length) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 35);
+      starts.push(Date.now());
+      return Promise.resolve(success(new URL(url).pathname.endsWith('/shop/getShops')
+        ? [shop] : { total: 1, list: [record] }));
+    },
+  });
+  assert.equal(await client.verifyConnection(mapping), true);
+  assert.equal(starts.length, 2);
+  assert.ok(starts[1] - starts[0] >= 25, 'actual transport starts retain the full interval');
+});
+
+test('releases the request queue after a synchronous transport failure', async () => {
+  const starts = [];
+  const client = createCjClient({
+    env, requestIntervalMs: 25, verificationTimeoutMs: 1000,
+    fetchImpl: (url) => {
+      starts.push(Date.now());
+      if (starts.length === 1) throw new Error('mock transport failure');
+      return Promise.resolve(success(new URL(url).pathname.endsWith('/shop/getShops')
+        ? [shop] : { total: 1, list: [record] }));
+    },
+  });
+  await rejectsCode(client.verifyConnection(mapping), 'CJ_UPSTREAM_UNAVAILABLE');
+  assert.equal(await client.verifyConnection(mapping), true);
+  assert.equal(starts.length, 3);
+  assert.ok(starts[1] - starts[0] >= 25, 'failed transports still respect the request interval');
+});

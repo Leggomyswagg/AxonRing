@@ -189,6 +189,7 @@ export function createCjClient({
   let shopCache;
   let shopFlight;
   let nextRequestAt = 0;
+  let dispatchPending = false;
   let queueTimer;
   const queue = [];
 
@@ -217,17 +218,26 @@ export function createCjClient({
 
   function drain() {
     clearTimeout(queueTimer);
-    if (!queue.length) return;
+    if (!queue.length || dispatchPending) return;
     const delay = Math.max(0, nextRequestAt - now());
     if (delay > 0) {
-      queueTimer = setTimeout(drain, delay);
+      queueTimer = setTimeout(drain, Math.ceil(delay));
       return;
     }
     const job = queue.shift();
     job.cleanup();
-    nextRequestAt = now() + requestIntervalMs;
-    job.resolve();
-    drain();
+    dispatchPending = true;
+    let released = false;
+    job.resolve((dispatched = false) => {
+      if (released) return;
+      released = true;
+      // Start the interval after the transport is invoked, rather than when
+      // its caller is scheduled. Async resumption and synchronous transport
+      // setup must not shorten the spacing between actual request starts.
+      if (dispatched) nextRequestAt = now() + requestIntervalMs;
+      dispatchPending = false;
+      drain();
+    });
   }
 
   function waitForTurn(signal) {
@@ -256,24 +266,32 @@ export function createCjClient({
     if (signal?.aborted) controller.abort();
     else signal?.addEventListener('abort', abort, { once: true });
     let timer = setTimeout(abort, verificationTimeoutMs);
+    let releaseTurn;
     try {
-      await waitForTurn(controller.signal);
+      releaseTurn = await waitForTurn(controller.signal);
       if (controller.signal.aborted) fail('CJ_UPSTREAM_TIMEOUT');
       clearTimeout(timer);
       timer = setTimeout(abort, requestTimeoutMs);
       const operation = (async () => {
-        const response = await fetchImpl(`${API_BASE}${path}`, {
-          method: body ? 'POST' : 'GET',
-          headers: {
-            Accept: 'application/json',
-            ...(token ? { 'CJ-Access-Token': token } : {}),
-            ...(body ? { 'Content-Type': 'application/json' } : {}),
-          },
-          ...(body ? { body: JSON.stringify(body) } : {}),
-          signal: controller.signal,
-          redirect: 'error',
-          cache: 'no-store',
-        });
+        let responsePromise;
+        try {
+          responsePromise = fetchImpl(`${API_BASE}${path}`, {
+            method: body ? 'POST' : 'GET',
+            headers: {
+              Accept: 'application/json',
+              ...(token ? { 'CJ-Access-Token': token } : {}),
+              ...(body ? { 'Content-Type': 'application/json' } : {}),
+            },
+            ...(body ? { body: JSON.stringify(body) } : {}),
+            signal: controller.signal,
+            redirect: 'error',
+            cache: 'no-store',
+          });
+        } finally {
+          releaseTurn(true);
+          releaseTurn = undefined;
+        }
+        const response = await responsePromise;
         if (!response?.ok) {
           if (response?.status === 401 || response?.status === 403) fail('CJ_AUTH_FAILED');
           if (response?.status === 429) fail('CJ_UPSTREAM_RATE_LIMITED');
@@ -300,6 +318,7 @@ export function createCjClient({
       }
       fail(controller.signal.aborted ? 'CJ_UPSTREAM_TIMEOUT' : 'CJ_UPSTREAM_UNAVAILABLE');
     } finally {
+      releaseTurn?.();
       clearTimeout(timer);
       signal?.removeEventListener('abort', abort);
     }
