@@ -103,6 +103,20 @@
     properties: { title: document.title, path: location.pathname },
   }).catch(() => {});
 
+  // Anonymous interaction signals for the new educational homepage modules.
+  window.addEventListener("axonring:experience", (event) => {
+    const detail = event.detail || {};
+    const allowed = ["use_case_selected", "platform_selected", "tap_step", "product_selected", "fit_guide_adjusted"];
+    if (detail.experience !== "interactive_home" || !allowed.includes(detail.action)) return;
+    track("cta_clicked", {
+      properties: {
+        cta: "interactive_" + detail.action,
+        selection: String(detail.value || "").slice(0, 32),
+        surface: "home_experience",
+        path: location.pathname,
+      },
+    }).catch(() => {});
+  });
   const copy = {
     card: ["Digital business card", "Share a contact card or profile page."],
     calendar: ["Booking page", "Open your Calendly or booking URL."],
