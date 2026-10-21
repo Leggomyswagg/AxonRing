@@ -1,0 +1,56 @@
+name: Commerce checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  commerce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out application files
+        # The baseline contains orphaned home-directory gitlinks, which break
+        # checkout's submodule cleanup. Sparse Git checkout avoids those files
+        # and supplies the read-only token only to the fetch process.
+        env:
+          CHECKOUT_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PYTHON'
+          import base64
+          import os
+          import subprocess
+
+          def git(*args, env=None):
+              subprocess.run(['git', *args], env=env, check=True)
+
+          git('init', '.')
+          git('remote', 'add', 'origin', os.environ['GITHUB_SERVER_URL'] + '/' + os.environ['GITHUB_REPOSITORY'])
+          git('sparse-checkout', 'init', '--no-cone')
+          patterns = ['/.github/', '/api/', '/docs/', '/public/', '/server/', '/tests/',
+                      '/index.html', '/package.json', '/package-lock.json', '/vite.config.ts',
+                      '/postcss.config.js', '/tailwind.config.ts', '/components.json',
+                      '/tsconfig*.json', '/eslint.config.js', '/privacy.html', '/terms.html']
+          subprocess.run(['git', 'sparse-checkout', 'set', '--no-cone', '--stdin'],
+                         input='\n'.join(patterns) + '\n', text=True, check=True)
+          fetch_env = dict(os.environ)
+          auth = base64.b64encode(('x-access-token:' + fetch_env.pop('CHECKOUT_TOKEN')).encode()).decode()
+          fetch_env.update(GIT_CONFIG_COUNT='1',
+                           GIT_CONFIG_KEY_0='http.' + os.environ['GITHUB_SERVER_URL'] + '/.extraheader',
+                           GIT_CONFIG_VALUE_0='AUTHORIZATION: basic ' + auth)
+          git('fetch', '--no-tags', '--depth=1', 'origin', os.environ['GITHUB_SHA'], env=fetch_env)
+          git('checkout', '--detach', 'FETCH_HEAD')
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          if actual != os.environ['GITHUB_SHA']:
+              raise SystemExit('Checkout commit did not match the workflow commit')
+          PYTHON
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run test:commerce
+      - run: npm run build
