@@ -9,7 +9,7 @@
 - Current production website and approved interactive experiences.
 - AxonRing AIA runtime, security docs, migrations and evaluation sources.
 - DB360 dashboard source.
-- Publisher OS product docs and workspace configuration.
+- Publisher OS product research, retained under `docs/incubator/` until there is an implementation.
 - Subdomain pages that contain distinct support, account, learning, developer, tracking or returns experiences.
 
 ## Excluded from the clean branch
@@ -19,5 +19,6 @@
 - Deployment archives, zip/tar bundles and generated dependency caches.
 - Superseded standalone marketing sites from AxonRing.com, AxonRing.online and axonring-fixed.
 - Empty placeholder repositories.
+- Publisher OS workspace configuration that referenced application and package directories that did not exist.
 
 Original repositories remain intact as rollback sources until this branch is validated and merged. After merge they can be archived; deletion is unnecessary.
