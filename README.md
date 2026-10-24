@@ -1,3 +1,21 @@
-# React + TypeScript + Vite
+# AxonRing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Canonical AxonRing product and operating-system monorepo.
+
+## Structure
+
+- Root and `public/`: production AxonRing.com marketing site.
+- `apps/aia-runtime/`: durable AI-agent runtime and evaluations.
+- `apps/db360/`: internal executive dashboard.
+- `apps/subdomain-pages/`: preserved support, account, developer and commerce subdomain pages.
+- `docs/incubator/publisher-os/`: useful Publisher OS product research; the nonfunctional workspace scaffold was removed.
+- `docs/`: architecture, consolidation decisions and operating notes.
+
+## Production website
+
+```bash
+npm ci
+npm run build
+```
+
+The root website remains independently deployable so the existing Vercel project does not need a root-directory change.
