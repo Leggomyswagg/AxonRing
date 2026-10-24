@@ -1,0 +1,17 @@
+import { redirect } from 'next/navigation';
+import { createSupabaseServerClient } from '@/lib/supabase-server';
+
+export default async function OperationsPage() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect('/login');
+  const { data: members } = await supabase.from('organization_members').select('organization_id').eq('user_id', user.id).limit(1);
+  const orgId = members?.[0]?.organization_id;
+  if (!orgId) redirect('/onboarding');
+  const [{ data: sources }, { data: rules }, { data: reports }] = await Promise.all([
+    supabase.from('data_sources').select('id,name,provider,source_type,status,last_synced_at').eq('organization_id', orgId).order('created_at', { ascending: false }),
+    supabase.from('automation_rules').select('id,name,trigger_type,action_type,enabled').eq('organization_id', orgId).order('created_at', { ascending: false }),
+    supabase.from('report_definitions').select('id,name,report_type,schedule,enabled').eq('organization_id', orgId).order('created_at', { ascending: false }),
+  ]);
+  return <main className="shell"><aside className="sidebar"><div className="brand"><span className="mark">A</span><span>AxonRing <b>DB360</b></span></div><nav><a href="/dashboard">Overview</a><a href="/dashboard/social">Social Analytics</a><a href="/dashboard/intelligence">Outcome Intelligence</a><a href="/dashboard/workbench">Command Workbench</a><a className="active" href="/dashboard/operations">Operations</a></nav></aside><section className="content"><header className="topbar"><div><p className="eyebrow">OPERATIONS LAYER</p><h1>Integrations, Automation & Reporting</h1><p className="sub">The control plane for ingestion, recurring actions, and executive reporting.</p></div></header><section className="kpi-grid"><article className="card kpi"><span>Data Sources</span><strong>{sources?.length ?? 0}</strong><em>Connected ingestion endpoints</em></article><article className="card kpi"><span>Automation Rules</span><strong>{rules?.length ?? 0}</strong><em>{rules?.filter(r => r.enabled).length ?? 0} enabled</em></article><article className="card kpi"><span>Reports</span><strong>{reports?.length ?? 0}</strong><em>{reports?.filter(r => r.enabled).length ?? 0} scheduled/enabled</em></article></section><section className="hero-grid"><article className="card"><p className="eyebrow">INGESTION</p><h2>Data sources</h2><p>{(sources ?? []).map(s => `${s.name} · ${s.provider || s.source_type} · ${s.status}`).join(' | ') || 'No external data sources connected yet.'}</p></article><article className="card"><p className="eyebrow">AUTOMATION</p><h2>Rules</h2><p>{(rules ?? []).map(r => `${r.name} · ${r.trigger_type} → ${r.action_type}`).join(' | ') || 'No automation rules configured yet.'}</p></article></section><section className="card"><p className="eyebrow">REPORTING</p><h2>Report definitions</h2><div className="table-wrap"><table><thead><tr><th>Name</th><th>Type</th><th>Schedule</th><th>Status</th></tr></thead><tbody>{(reports ?? []).map(r => <tr key={r.id}><td>{r.name}</td><td>{r.report_type}</td><td>{r.schedule || 'On demand'}</td><td>{r.enabled ? 'Enabled' : 'Paused'}</td></tr>)}</tbody></table>{!(reports ?? []).length && <p className="sub">No reports configured yet. The data model is ready for scheduled executive, campaign, social, and outcome reports.</p>}</div></section></section></main>;
+}
