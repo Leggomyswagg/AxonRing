@@ -1,0 +1,22 @@
+/* AxonRing — connection foundation, used by the homepage and Our Purpose page. */
+.hero-principle{margin:10px 0 0;color:var(--gold2,#f4d98c);font-size:.88rem;letter-spacing:.07em}
+.brand-foundation{background:linear-gradient(160deg,#091726,#101f32);color:#f4f0e6}
+.brand-foundation .head p{max-width:410px}
+.foundation-card{padding:clamp(24px,3vw,38px);min-height:215px}
+.foundation-card h3{font-size:clamp(1.2rem,2vw,1.6rem);margin:16px 0}
+.foundation-card p{color:#b8c2cd;max-width:34ch}
+.foundation-quote{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.65rem,3.2vw,2.55rem);line-height:1.18;max-width:850px;margin:44px 0 0;color:#f4d98c}
+.about-hero{padding:clamp(72px,10vw,140px) 0 70px;background:radial-gradient(circle at 80% 20%,rgba(209,173,88,.17),transparent 45%),#07111f}
+.about-kicker{color:#f4d98c;letter-spacing:.17em;text-transform:uppercase;font-size:.77rem}
+.about-hero h1{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(3.1rem,7vw,6.4rem);font-weight:500;letter-spacing:-.03em;line-height:1;margin:24px 0;max-width:950px}
+.about-hero .about-statement{font-size:clamp(1.25rem,2.2vw,1.65rem);line-height:1.5;max-width:760px;color:#c9d1d9}
+.about-body{background:#f3f0e8;color:#07111f;padding:clamp(60px,8vw,110px) 0}
+.about-body .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,7vw,110px)}
+.about-body h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:500;line-height:1.1;margin:0 0 20px}
+.about-body p{font-size:1.04rem;line-height:1.8;color:#344152}
+.about-pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:46px}
+.about-pillars article{padding:26px;background:#fff;border:1px solid #dfd9cc;border-radius:14px}
+.about-pillars h3{margin:0 0 10px;font-family:"Cormorant Garamond",Georgia,serif;font-size:2rem}
+.about-pillars p{font-size:.95rem;margin:0}
+.about-footer-note{color:#b8c2cd;font-size:.9rem;line-height:1.6;max-width:660px}
+@media(max-width:760px){.about-body .about-grid,.about-pillars{grid-template-columns:1fr}.foundation-card{min-height:0}.foundation-quote{margin-top:25px}}
