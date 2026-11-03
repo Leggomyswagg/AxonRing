@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Docs — AxonRing</title>
+  <meta name="description" content="Documentation, SDKs, and integration guides for building with AxonRing. Visit developers.axonring.com for developer docs." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://developers.axonring.com/" />
+  <meta property="og:title" content="Developer Docs — AxonRing" />
+  <meta property="og:description" content="Documentation, SDKs, and integration guides for building with AxonRing. Visit developers.axonring.com for developer docs." />
+  <meta property="og:url" content="https://developers.axonring.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant:wght@700;800&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0C0A08; --ink-2: #161210; --ink-3: #1E1A16;
+      --gold: #C9A84C; --gold-light: #E8C97A; --gold-pale: #F5E6C0;
+      --cream: #FAF7F0; --warm-white: #F2EDE4;
+      --stone: #8C7B6B; --stone-light: #B5A898;
+      --border: rgba(201,168,76,0.18); --border-soft: rgba(201,168,76,0.08);
+      --ff-serif: 'Cormorant Garamond', Georgia, serif;
+      --ff-serif-bold: 'Cormorant', Georgia, serif;
+      --ff-sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--ff-sans); background: var(--ink); color: var(--cream);
+      min-height: 100vh; font-weight: 300; letter-spacing: 0.02em;
+      display: flex; flex-direction: column; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--ff-sans); cursor: pointer; border: none; }
+
+    /* Grain overlay */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.05'/%3E%3C/svg%3E");
+      opacity: 0.35; mix-blend-mode: overlay;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px; height: 80px;
+      background: rgba(12,10,8,0.92); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-wordmark {
+      font-family: var(--ff-serif-bold); font-size: 22px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream);
+    }
+    .nav-wordmark span { color: var(--gold); }
+    .nav-back {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--stone-light); display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold-light); }
+
+    /* Main */
+    main {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 140px 40px 80px; text-align: center; position: relative; z-index: 2;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    }
+    .breadcrumb {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 40px;
+      animation: fade-down 1s ease 0.1s both;
+    }
+    .breadcrumb .dot { color: var(--stone); margin: 0 12px; }
+    .breadcrumb .current { color: var(--gold-light); }
+
+    h1 {
+      font-family: var(--ff-serif); font-size: clamp(52px, 9vw, 110px);
+      font-weight: 300; line-height: 1.0; letter-spacing: -0.01em;
+      margin-bottom: 32px; color: var(--cream);
+      animation: fade-down 1s ease 0.3s both;
+    }
+    h1 em { font-style: italic; color: var(--gold-light); }
+
+    .divider {
+      width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      margin: 0 auto 32px; animation: fade-in 1s ease 0.5s both;
+    }
+
+    .sub {
+      font-size: 15px; letter-spacing: 0.1em; line-height: 2;
+      color: var(--stone-light); max-width: 540px; margin: 0 auto 48px;
+      animation: fade-in 1s ease 0.6s both;
+    }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 20px; border: 1px solid var(--border);
+      font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 56px;
+      animation: fade-in 1s ease 0.8s both;
+      background: rgba(201,168,76,0.04);
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* Email form */
+    .form-wrap {
+      max-width: 460px; margin: 0 auto;
+      animation: fade-up 1s ease 1s both;
+    }
+    .form-label {
+      font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--stone); margin-bottom: 16px; display: block;
+    }
+    .form-row { display: flex; gap: 0; border: 1px solid var(--border); }
+    .form-row input {
+      flex: 1; background: transparent; border: none; color: var(--cream);
+      font-family: var(--ff-sans); font-size: 14px; font-weight: 300;
+      padding: 18px 20px; outline: none; letter-spacing: 0.03em;
+    }
+    .form-row input::placeholder { color: var(--stone); }
+    .form-row input:focus { background: rgba(201,168,76,0.04); }
+    .form-row button {
+      background: var(--gold); color: var(--ink);
+      padding: 0 32px; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+    .form-row button:hover { background: var(--gold-light); }
+    .form-note {
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--stone); margin-top: 16px;
+    }
+    .form-success {
+      display: none; padding: 18px; border: 1px solid var(--border);
+      color: var(--gold-light); font-size: 13px; letter-spacing: 0.06em;
+      background: rgba(201,168,76,0.06);
+    }
+    .form-success.show { display: block; animation: fade-in 0.4s ease; }
+
+    /* Primary CTA for live subdomains */
+    .live-cta {
+      display: inline-block; padding: 16px 44px;
+      background: var(--gold); color: var(--ink);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+      animation: fade-up 1s ease 1s both;
+    }
+    .live-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* Footer */
+    footer {
+      padding: 32px 40px; border-top: 1px solid var(--border-soft);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px; position: relative; z-index: 2;
+    }
+    .footer-copy { font-size: 11px; letter-spacing: 0.1em; color: var(--stone); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--stone); transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+
+    /* Animations */
+    @keyframes fade-down { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav { padding: 0 24px; height: 64px; }
+      main { padding: 100px 24px 60px; }
+      .breadcrumb { font-size: 9px; letter-spacing: 0.25em; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; }
+      .form-row { flex-direction: column; }
+      .form-row button { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://axonring.com" class="nav-wordmark">Axon<span>Ring</span></a>
+    <a href="https://axonring.com" class="nav-back">← Main Site</a>
+  </nav>
+
+  <main>
+    <div class="breadcrumb">
+      <span>AxonRing</span><span class="dot">·</span><span>Technical</span><span class="dot">·</span><span class="current">Developer Docs</span>
+    </div>
+
+    <h1>For<br/><em>Developers</em></h1>
+
+    <div class="divider"></div>
+
+    <p class="sub">Documentation, SDKs, and integration guides for building with AxonRing.</p>
+
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span>Coming Soon</span>
+    </div>
+
+    <div class="form-wrap">
+      <span class="form-label">Join Beta</span>
+      <form id="notify-form" class="form-row">
+        <input type="email" placeholder="your@email.com" required aria-label="Email address" />
+        <button type="submit">Notify Me</button>
+      </form>
+      <p class="form-note">We respect your privacy. No spam — ever.</p>
+      <div id="form-success" class="form-success">Thank you. You will be among the first to know.</div>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-copy">© 2026 AxonRing. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="https://axonring.com">Home</a>
+      <a href="https://axonring.com/#collections">Shop</a>
+      <a href="https://axonring.com/#faq">Support</a>
+    </div>
+  </footer>
+
+  <script>
+    // Email capture (client-side only — replace with real endpoint when ready)
+    const form = document.getElementById('notify-form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const input = form.querySelector('input');
+        const email = input.value.trim();
+        if (!email || !email.includes('@')) return;
+        // TODO: POST to your email capture endpoint
+        // fetch('/api/notify', { method: 'POST', body: JSON.stringify({email, source: 'developers'}) })
+        document.getElementById('form-success').classList.add('show');
+        form.style.display = 'none';
+      });
+    }
+  </script>
+</body>
+</html>

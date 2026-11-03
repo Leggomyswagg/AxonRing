@@ -1,0 +1,73 @@
+/* AxonRing interactive experiences — scoped to avoid altering the existing site. */
+.axr-xp{--xp-gold:#caa65a;--xp-glow:#f1d591;--xp-line:rgba(202,166,90,.25);color:#f8f6f0;background:linear-gradient(145deg,#06101d,#0b1e32 58%,#071422)}
+.axr-xp .axr-xp-head{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:2.3rem}
+.axr-xp .axr-xp-head p{max-width:440px;font-size:.94rem;line-height:1.8;color:#b2bfca}
+.axr-xp h2{max-width:740px;margin:.6rem 0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2.8rem,5vw,5.2rem);font-weight:400;line-height:.94}
+.axr-xp h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.06}
+.axr-xp .xp-kicker{font:500 .69rem Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2,#f1d591)}
+.axr-xp .xp-note{font-size:.77rem;line-height:1.65;color:#aeb9c6}
+.axr-xp button{cursor:pointer}
+.axr-xp button:focus-visible,.axr-xp input:focus-visible,.axr-xp a:focus-visible{outline:2px solid #f1d591;outline-offset:4px}
+.axr-xp .xp-choice{display:inline-flex;gap:9px;align-items:center;justify-content:center;min-height:44px;padding:9px 16px;border:1px solid var(--xp-line);border-radius:0;background:transparent;color:#c4ced9;font:500 .71rem Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.axr-xp .xp-choice[aria-pressed="true"]{background:#caa65a;border-color:#caa65a;color:#07111f}
+.axr-xp .xp-choice:hover{border-color:#f1d591}
+.axr-xp .xp-choice-row{display:flex;gap:9px;flex-wrap:wrap}
+.axr-xp .xp-panel{border:1px solid var(--xp-line);background:rgba(6,16,29,.54)}
+.axr-xp .xp-stage{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);min-height:480px;overflow:hidden}
+.axr-xp .xp-details{padding:clamp(24px,4vw,55px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.axr-xp .xp-details h3{font-size:clamp(2.3rem,4vw,4rem);margin:20px 0 10px}
+.axr-xp .xp-details > p{color:#adbac8;line-height:1.85;max-width:450px}
+.axr-xp .xp-explainer{min-height:72px;padding:20px 0 0;border-top:1px solid var(--xp-line);font-size:.86rem}
+.axr-xp .xp-stepper{display:flex;gap:14px;margin:30px 0 20px;color:#9fabbb;font-size:.72rem;letter-spacing:.08em}
+.axr-xp .xp-stepper span{display:flex;align-items:center;gap:8px}
+.axr-xp .xp-stepper span::before{content:"";display:inline-block;width:7px;height:7px;border:1px solid #a0aeba;border-radius:50%}
+.axr-xp .xp-stepper span.is-active{color:#f1d591}
+.axr-xp .xp-stepper span.is-active::before{background:#f1d591;border-color:#f1d591}
+.axr-xp .xp-device-scene{position:relative;overflow:hidden;display:grid;place-items:center;min-height:480px;background:radial-gradient(circle at 55% 40%,rgba(62,113,163,.36),transparent 55%),linear-gradient(150deg,#14283e,#081320)}
+.axr-xp .xp-device-scene::before{content:"";position:absolute;inset:28px;border:1px solid rgba(241,213,145,.11);pointer-events:none}
+.axr-xp .xp-device{position:relative;z-index:1;width:min(245px,65%);aspect-ratio:9/17.5;border:8px solid #26364a;border-radius:39px;background:linear-gradient(160deg,#14263a,#050d17);box-shadow:0 40px 70px #0008,0 0 0 2px #8190a344,inset 0 0 0 1px #d8e5f01c;transition:transform .4s}
+.axr-xp .xp-device::before{content:"";position:absolute;z-index:4;top:10px;left:50%;transform:translateX(-50%);width:31%;height:14px;border-radius:20px;background:#01070d}
+.axr-xp .xp-device-screen{position:absolute;inset:28px 12px 14px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.axr-xp .xp-device-screen .xp-screen-app{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:#d7b875}
+.axr-xp .xp-device-screen h4{font:500 clamp(1.35rem,2.6vw,2.3rem)/1.1 "Cormorant Garamond",Georgia,serif;margin:0;color:#f7f2e7}
+.axr-xp .xp-device-screen p{font-size:.72rem;color:#b7c5d1;margin:0}
+.axr-xp .xp-device-screen .xp-action{font-size:.65rem;color:#f0d38d;word-break:break-word;border-top:1px solid #e0c27a35;padding-top:11px}
+.axr-xp .xp-ring{position:absolute;z-index:3;left:9%;bottom:17%;width:106px;height:106px;border:24px solid #111a24;border-radius:50%;transform:rotate(-23deg);box-shadow:inset 7px 4px 10px #0009,8px 15px 25px #0009,0 0 0 2px #d6b76e;pointer-events:none}
+.axr-xp .xp-ring:after{content:"";position:absolute;inset:-24px;border-radius:50%;border:2px solid #d4b8755e}
+.axr-xp .xp-wave{position:absolute;z-index:2;left:28%;bottom:32%;border:1px solid rgba(240,210,134,.8);border-radius:50%;width:100px;height:100px;opacity:0;pointer-events:none}
+.axr-xp[data-stage="1"] .xp-wave,.axr-xp[data-stage="2"] .xp-wave{animation:axr-xp-wave 1.25s ease-out both}
+.axr-xp[data-stage="1"] .xp-wave:nth-of-type(2),.axr-xp[data-stage="2"] .xp-wave:nth-of-type(2){animation-delay:.25s}
+.axr-xp[data-stage="2"] .xp-device{transform:translateY(-5px)}
+.axr-xp .xp-scene-label{position:absolute;right:22px;bottom:19px;z-index:4;color:#d9c79f;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase}
+@keyframes axr-xp-wave{0%{opacity:.82;transform:scale(.25)}100%{opacity:0;transform:scale(2.7)}}
+.axr-xp .xp-platform{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 0;flex-wrap:wrap}
+.axr-xp .xp-platform .xp-choice{min-height:38px;font-size:.62rem}
+.axr-xp .xp-tip{margin:15px 0 0;min-height:37px;color:#aabac7;font-size:.8rem}
+.axr-xp.explore{background:#f5f2ea;color:#07111f}
+.axr-xp.explore .xp-kicker{color:#8c6c2d}
+.axr-xp.explore .axr-xp-head p{color:#536073}
+.axr-xp.explore .xp-panel{background:#fff;border-color:#d9d3c5}
+.axr-xp .xp-explore-grid{display:grid;grid-template-columns:1.07fr .93fr;gap:16px}
+.axr-xp .xp-product-visual{position:relative;min-height:410px;overflow:hidden;background:#081523;display:grid;place-items:center}
+.axr-xp .xp-product-visual img{width:100%;height:100%;max-height:510px;min-height:410px;object-fit:cover;filter:saturate(.77);transition:opacity .25s}
+.axr-xp .xp-product-visual .xp-image-note{position:absolute;left:20px;bottom:18px;right:20px;padding-top:15px;border-top:1px solid #f1d59174;color:#f0e7d5;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;text-shadow:0 1px 4px #000}
+.axr-xp .xp-product-info{padding:clamp(24px,3.4vw,45px);display:flex;flex-direction:column;justify-content:center}
+.axr-xp .xp-product-info h3{font-size:clamp(2.5rem,4vw,4.1rem);margin:25px 0 10px}
+.axr-xp .xp-product-price{font:400 1.9rem "Cormorant Garamond",Georgia,serif;color:#896816}
+.axr-xp .xp-product-info .xp-product-desc{font-size:.9rem;line-height:1.8;color:#4e5c6d}
+.axr-xp .xp-product-info .xp-choice{color:#485365;border-color:#d3cbbd}
+.axr-xp .xp-product-info .xp-choice[aria-pressed="true"]{background:#07111f;border-color:#07111f;color:#f1d591}
+.axr-xp .xp-finder{margin-top:16px;padding:clamp(24px,3vw,42px);display:grid;grid-template-columns:1fr .95fr;gap:35px}
+.axr-xp .xp-finder h3{font-size:clamp(2rem,3vw,3rem);margin:10px 0}
+.axr-xp .xp-finder p{color:#536073;font-size:.86rem;line-height:1.75}
+.axr-xp .xp-fit-label{display:block;font-size:.77rem;letter-spacing:.06em;color:#324254;margin:15px 0 10px}
+.axr-xp .xp-fit-range{width:100%;accent-color:#9c7939;cursor:pointer}
+.axr-xp .xp-fit-range-labels{display:flex;justify-content:space-between;color:#687483;font-size:.75rem}
+.axr-xp .xp-fit-result{padding:20px 24px;background:#f5f1e8;border-left:3px solid #ab8951}
+.axr-xp .xp-fit-result strong{display:block;font:500 2.5rem "Cormorant Garamond",Georgia,serif}
+.axr-xp .xp-fit-result small{display:block;font-size:.79rem;color:#536073}
+.axr-xp .xp-finder .btn{margin-top:18px}
+.axr-xp .xp-disclaimer{font-size:.77rem!important;color:#707887!important}
+@media(max-width:900px){.axr-xp .xp-stage,.axr-xp .xp-explore-grid,.axr-xp .xp-finder{grid-template-columns:1fr}.axr-xp .axr-xp-head{display:block}.axr-xp .xp-device-scene{min-height:410px}.axr-xp .xp-device{width:180px}.axr-xp .xp-finder{gap:18px}}
+@media(max-width:580px){.axr-xp .xp-stage{min-height:auto}.axr-xp .xp-details{padding:24px}.axr-xp .xp-stepper{flex-wrap:wrap}.axr-xp .xp-device-scene{min-height:390px}.axr-xp .xp-ring{left:4%;bottom:15%;width:80px;height:80px;border-width:18px}.axr-xp .xp-ring:after{inset:-18px}.axr-xp .xp-product-visual img{min-height:320px}.axr-xp .xp-product-visual{min-height:320px}.axr-xp .xp-choice{flex:1 1 auto;padding:9px}}
+@media(prefers-reduced-motion:reduce){.axr-xp .xp-wave{animation:none!important}.axr-xp .xp-device,.axr-xp .xp-product-visual img{transition:none}}
